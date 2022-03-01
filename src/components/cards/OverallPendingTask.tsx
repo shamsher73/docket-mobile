@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
      
     },
     header : {
-        fontFamily: 'Roboto',
+        // fontFamily: 'Roboto',
         fontStyle: 'normal',
         fontWeight: 'bold',
         fontSize: 16,
@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
         color: '#171725',
     },
     valueText : {
-        fontFamily: 'Poppins',
+        // fontFamily: 'Poppins',
         fontStyle: 'normal',
         fontWeight: 'normal',
         fontSize: 18,

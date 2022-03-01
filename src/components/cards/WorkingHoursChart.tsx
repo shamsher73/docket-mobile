@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
      
     },
     header : {
-        fontFamily: 'Roboto',
+        // fontFamily: 'Roboto',
         fontStyle: 'normal',
         fontWeight: 'bold',
         fontSize: 16,
@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
         justifyContent: "space-around",
     },
     legendText : {
-        fontFamily: 'Roboto',
+        // fontFamily: 'Roboto',
         fontStyle: 'normal',
         fontWeight: 'normal',
         fontSize: 14,

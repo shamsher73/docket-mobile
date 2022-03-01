@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
         paddingLeft: 14,
     },
     headerText: {
-        fontFamily: "Roboto",
+        // fontFamily: "Roboto",
         fontStyle: "normal",
         fontWeight: "normal",
         fontSize: 12,
@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
         color: "#92929D",
     },
     subText: {
-        fontFamily: "Roboto",
+        // fontFamily: "Roboto",
         fontStyle: "normal",
         fontWeight: "normal",
         fontSize: 14,

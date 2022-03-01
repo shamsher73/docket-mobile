@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
        
     },
     headerText: {
-        fontFamily: 'Roboto',
+        // fontFamily: 'Roboto',
         fontStyle: 'normal',
         fontWeight: 'normal',
         fontSize: 18,
@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
         color: '#F6F6F6',
     },
     drawerContent: {
-        fontFamily: 'Roboto',
+        // fontFamily: 'Roboto',
         fontStyle: 'normal',
         fontWeight: 'bold',
         fontSize: 16,        
@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
         paddingLeft: 20
     },
     drawerContentSelected: {
-        fontFamily: 'Roboto',
+        // fontFamily: 'Roboto',
         fontStyle: 'normal',
         fontWeight: 'bold',
         fontSize: 16,

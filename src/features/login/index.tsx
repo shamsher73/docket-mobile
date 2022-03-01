@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
     },
     loginText: {
-        fontFamily: "Poppins",
+        // fontFamily: "Poppins-Bold",
         fontStyle: "normal",
         fontWeight: "bold",
         fontSize: 20,
@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     buttonText: {
-        fontFamily: 'Poppins',
+        // fontFamily: 'Poppins',
         fontStyle: 'normal',
         fontWeight: 'bold',
         fontSize: 16,

@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     },
    
     subText: {
-        fontFamily: "Roboto",
+        // fontFamily: "Roboto",
         fontStyle: "normal",
         fontWeight: "bold",
         fontSize: 14,

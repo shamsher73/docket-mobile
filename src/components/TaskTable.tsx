@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
         marginTop: 5,
     },
     taskText: {
-        fontFamily: "Roboto",
+        // fontFamily: "Roboto",
         fontStyle: "normal",
         fontWeight: "bold",
         fontSize: 16,
@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
         color: "#171725",
     },
     taskCategory: {
-        fontFamily: "Poppins",
+        // fontFamily: "Poppins",
         fontStyle: "normal",
         fontWeight: "normal",
         fontSize: 14,

@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
         padding: 10,
     },
     header: {
-        fontFamily: "Poppins",
+        // fontFamily: "Poppins",
         fontStyle: "normal",
         fontWeight: "bold",
         fontSize: 20,

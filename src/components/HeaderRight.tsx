@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
         marginRight: 10
     },
     menuText: {
-        fontFamily: 'Roboto',
+        // fontFamily: 'Roboto',
         fontStyle: 'normal',
         fontWeight: 'bold',
         fontSize: 22,

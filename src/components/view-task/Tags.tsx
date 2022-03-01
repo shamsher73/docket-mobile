@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
     },
     subText: {
         paddingLeft: 12,
-        fontFamily: "Roboto",
+        // fontFamily: "Roboto",
         fontStyle: "normal",
         fontWeight: "bold",
         fontSize: 14,
@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
         paddingLeft: 14,
     },
     headerText: {
-        fontFamily: "Roboto",
+        // fontFamily: "Roboto",
         fontStyle: "normal",
         fontWeight: "normal",
         fontSize: 12,
@@ -130,7 +130,7 @@ const styles = StyleSheet.create({
     tagText: {
         marginLeft: 12,
         flex: 1,
-        fontFamily: "Roboto",
+        // fontFamily: "Roboto",
         fontStyle: "normal",
         fontWeight: "normal",
         fontSize: 14,

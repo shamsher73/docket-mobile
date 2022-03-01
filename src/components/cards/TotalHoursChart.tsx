@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
      
     },
     header : {
-        fontFamily: 'Roboto',
+        // fontFamily: 'Roboto',
         fontStyle: 'normal',
         fontWeight: 'bold',
         fontSize: 16,

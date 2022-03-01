@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
         justifyContent: "space-between",
     },
     header: {
-        fontFamily: 'Roboto',
+        // fontFamily: 'Roboto',
         fontStyle: 'normal',
         fontWeight: 'bold',
         fontSize: 16,
@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
         right: 1,
     },
     rate : {
-        fontFamily: 'Poppins',
+        // fontFamily: 'Poppins',
         fontStyle: 'normal',
         fontWeight: 'normal',
         fontSize: 24,
