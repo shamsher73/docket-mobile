@@ -16,7 +16,7 @@ const Dashboard = () => {
         <ScrollView style={styles.container}>
             <Text style={styles.header}>Overview</Text>
             <Filter filter="year" filterValues={filterValues} filterHandler={() => { }} />
-            <TotalHoursChart categories={[{ 'name': 'Category 1', 'value': 1 }, { 'name': 'Category 2', 'value': 1 }, { 'name': 'Category 3', 'value': 1 }, { 'name': 'More', 'value': 2 }]} />
+            <TotalHoursChart categories={[{ 'name': 'Category 1', 'value': 4 }, { 'name': 'Category 2', 'value': 3 }, { 'name': 'Category 3', 'value': 2 }, { 'name': 'More', 'value': 1 }]} />
             <WorkingHoursChart labels={labels} dataset={dataset} legends={legends}/>
             <OverallPendingTask max={24} value={16} />
             <SuccessRate rate={80} />
