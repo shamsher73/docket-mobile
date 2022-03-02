@@ -1,23 +1,17 @@
 import { DrawerContentScrollView, DrawerItem, DrawerItemList } from "@react-navigation/drawer";
 import { StyleSheet } from "react-native";
-import { logger } from "react-native-logs";
-import {useRoute} from '@react-navigation/native';
-import { NavigationContainer, useNavigationContainerRef } from '@react-navigation/native';
-import React from "react";
+import React, { useState } from "react";
 
 const CustomDrawerContent = (props) => {
-    
+    const [currentRoute, setCurrentRoute] = useState('Dashboard');
     const {navigation} = props;
-    // var log = logger.createLogger();
-    // log.info(navigation.state.params);
-
     return (
         <DrawerContentScrollView {...props} style={{margin:0,padding:0}}>
           <DrawerItemList {...props}   />
-          <DrawerItem label="Shivam Chaudhary" onPress={() => alert('Link to help')} style={styles.header} labelStyle={styles.headerText}/>
-          <DrawerItem label="Dashboard" onPress={() => navigation.navigate('Dashboard')} labelStyle={styles.drawerContent} />
-          <DrawerItem label="My Day Tasks" onPress={() => navigation.navigate('My Day Tasks')} labelStyle={styles.drawerContent} />
-          <DrawerItem label="Tasks" onPress={() => alert('Link to help')} labelStyle={styles.drawerContentSelected} />
+          <DrawerItem label="Shivam Chaudhary" onPress={() => alert('Not accessible')} style={styles.header} labelStyle={styles.headerText}/>
+          <DrawerItem label="Dashboard" onPress={() => {setCurrentRoute("Dashboard");navigation.navigate('Dashboard')}} labelStyle={currentRoute == "Dashboard" ? styles.drawerContentSelected : styles.drawerContent} />
+          <DrawerItem label="My Day Tasks" onPress={() => {setCurrentRoute("My Day Tasks");navigation.navigate('My Day Tasks')}} labelStyle={currentRoute == "My Day Tasks" ? styles.drawerContentSelected : styles.drawerContent} />
+          <DrawerItem label="Tasks" onPress={() => alert('Not accessible')} labelStyle={currentRoute == "Tasks" ? styles.drawerContentSelected : styles.drawerContent} />
         </DrawerContentScrollView>
       );
 }
