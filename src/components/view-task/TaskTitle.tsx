@@ -1,7 +1,7 @@
 
 import { useState } from 'react';
 import { Button, StyleSheet, Text, TextInput, TouchableHighlight, View } from 'react-native';
-import OvalIcon from './../../../assets/oval.svg';
+import OvalIcon from './../../../assets/images/oval.svg';
 import React from "react";
 
 const TaskTitle = ({ title,handleChange }:{title:string,handleChange:any}) => {

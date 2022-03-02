@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View } from "react-native";
 import { logger } from "react-native-logs";
-import MenuIcon from './../../assets/menu-icon.svg';
+import MenuIcon from './../../assets/images/menu-icon.svg';
 import React from "react";
 
 const HeaderMenu = (props:any) => {

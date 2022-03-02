@@ -1,7 +1,7 @@
 
 import { useState } from 'react';
 import { Button, StyleSheet, Text, TextInput, TouchableHighlight, View } from 'react-native';
-import CategoryIcon from './../../../assets/category.svg';
+import CategoryIcon from './../../../assets/images/category.svg';
 import React from "react";
 
 const CategoryName = ({ category,handleChange }:{category:string,handleChange:any}) => {

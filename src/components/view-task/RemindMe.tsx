@@ -1,7 +1,7 @@
 
 import { useState } from 'react';
 import { Button, StyleSheet, Text, TouchableHighlight, View } from 'react-native';
-import RemindMeIcon from './../../../assets/remindme.svg';
+import RemindMeIcon from './../../../assets/images/remindme.svg';
 import React from "react";
 
 const RemindMe =  ({ date,handleChange }:{date:string,handleChange:any}):JSX.Element => {

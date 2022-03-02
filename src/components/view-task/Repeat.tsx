@@ -1,7 +1,7 @@
 
 import { useState } from 'react';
 import { Button, StyleSheet, Text, TextInput, TouchableHighlight, View } from 'react-native';
-import RepeatIcon from './../../../assets/repeat.svg';
+import RepeatIcon from './../../../assets/images/repeat.svg';
 import React from "react";
 
 const Repeat = ({ repeat,handleChange }:{repeat:string,handleChange:any}) => {

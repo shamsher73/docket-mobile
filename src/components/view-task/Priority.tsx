@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View } from "react-native";
-import PriorityIcon from './../../../assets/priority.svg';
+import PriorityIcon from './../../../assets/images/priority.svg';
 import React from "react";
 
 const Priority = ({priority}:{priority:string}) => {

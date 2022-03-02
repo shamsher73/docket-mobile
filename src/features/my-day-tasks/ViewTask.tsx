@@ -2,13 +2,13 @@
 // import Priority from "../../components/view-task/Priority";
 // import CategoryName from "../../components/view-task/CategoryName";
 // import Description from "../../components/view-task/Description";
-// import CloseIcon from './../../../assets/close.svg';
+// import CloseIcon from './../../../assets/images/close.svg';
 // import Tags from "../../components/view-task/Tags";
 // import DueDate from "../../components/view-task/DueDate";
 // import RemindMe from "../../components/view-task/RemindMe";
 // import Repeat from "../../components/view-task/Repeat";
 // import TaskTitle from "../../components/view-task/TaskTitle";
-// import DeleteIcon from './../../../assets/delete.svg';
+// import DeleteIcon from './../../../assets/images/delete.svg';
 // import { logger } from "react-native-logs";
 // import { useEffect, useState } from "react";
 // import { updateTask } from "./taskSlice";

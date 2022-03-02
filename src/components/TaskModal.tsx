@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import { Alert, Modal, StyleSheet, Text, View, Image, TextInput, TouchableHighlight } from "react-native";
-import CloseModal from './../../assets/close_modal.svg';
+import CloseModal from './../../assets/images/close_modal.svg';
 import DropDownPicker from 'react-native-dropdown-picker';
 import { useDispatch, useSelector } from "react-redux";
 import { removeTask, updateTask } from "../features/my-day-tasks/taskSlice";
-import CloseIcon from './../../assets/close.svg';
+import CloseIcon from './../../assets/images/close.svg';
 import TaskTitle from "./view-task/TaskTitle";
 import { logger } from "react-native-logs";
 import Description from "./view-task/Description";
 import { useEffect } from "react";
-import DeleteIcon from './../../assets/delete.svg';
+import DeleteIcon from './../../assets/images/delete.svg';
 import CategoryName from "./view-task/CategoryName";
 import Priority from "./view-task/Priority";
 import Tags from "./view-task/Tags";

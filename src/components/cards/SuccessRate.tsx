@@ -1,7 +1,7 @@
-// import Party1 from './../../styles/assets/images/party.png';
+// import Party1 from './../../styles/assets/images/images/party.png';
 
 import { StyleSheet, Text, View } from "react-native";
-import Party from './../../../assets/party.svg';
+import Party from './../../../assets/images/party.svg';
 import React from "react";
 
 const SuccessRate = ({rate}:{rate:number}) => {

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { StyleSheet, Text, TouchableHighlight, View } from "react-native";
-import Unchecked from './../../assets/unchecked.svg';
-import Checked from './../../assets/checked.svg';
+import Unchecked from './../../assets/images/unchecked.svg';
+import Checked from './../../assets/images/checked.svg';
 import React from "react";
 interface SubTask {
     title: string

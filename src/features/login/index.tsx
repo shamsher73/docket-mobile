@@ -1,7 +1,7 @@
 import { Button, Pressable, StyleSheet, Text, View } from "react-native";
-import GoogleIcon from './../../../assets/Google.svg';
-import UserOnDesk from './../../../assets/user-on-desk.svg';
-import GeekyAntsLogo from './../../../assets/geeky-logo.svg';
+import GoogleIcon from './../../../assets/images/Google.svg';
+import UserOnDesk from './../../../assets/images/user-on-desk.svg';
+import GeekyAntsLogo from './../../../assets/images/geeky-logo.svg';
 import React from "react";
 
 const UserLogin = ({ navigation }: { navigation: any }) => {

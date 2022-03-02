@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View } from "react-native";
-import SearchIcon from './../../assets/search.svg';
-import BellIcon from './../../assets/bell.svg';
+import SearchIcon from './../../assets/images/search.svg';
+import BellIcon from './../../assets/images/bell.svg';
 import React from "react";
 
 const HeaderRight = () => {

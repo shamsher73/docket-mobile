@@ -1,8 +1,8 @@
 
-import CancelIcon from './../../../assets/close.svg';
-import TagIcon from './../../../assets/tag.svg';
-import Add from './../../../assets/add.svg';
-import OvalIcon from './../../../assets/oval.svg';
+import CancelIcon from './../../../assets/images/close.svg';
+import TagIcon from './../../../assets/images/tag.svg';
+import Add from './../../../assets/images/add.svg';
+import OvalIcon from './../../../assets/images/oval.svg';
 import React from "react";
 import { useState } from 'react';
 import { Button, StyleSheet, Text, TextInput, TouchableHighlight, View } from 'react-native';

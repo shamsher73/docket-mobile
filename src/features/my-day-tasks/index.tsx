@@ -6,13 +6,13 @@
 // import TaskModal from "../../components/TaskModal";
 import { useSelector } from "react-redux";
 import { RootState } from "../../app/store";
-import FilterIcon from './../../../assets/filter.svg';
+import FilterIcon from './../../../assets/images/filter.svg';
 
 import { useState } from "react";
 import { StyleSheet, Text, View, Modal, Pressable, Alert } from "react-native";
 import Filter from "../../components/Filter";
 import TaskTable from '../../components/TaskTable';
-import Add from './../../../assets/addicon.svg';
+import Add from './../../../assets/images/addicon.svg';
 import AddTask from './AddTask';
 import { logger } from "react-native-logs";
 import TaskModal from "../../components/TaskModal";

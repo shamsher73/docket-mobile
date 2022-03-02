@@ -1,7 +1,7 @@
 
 import { useState } from 'react';
 import { Button, StyleSheet, Text, TouchableHighlight, View } from 'react-native';
-import DateIcon from './../../../assets/date.svg';
+import DateIcon from './../../../assets/images/date.svg';
 import React from "react";
 // import DatePicker from 'react-native-datepicker'
 

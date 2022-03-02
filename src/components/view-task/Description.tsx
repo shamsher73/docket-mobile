@@ -1,7 +1,7 @@
 
 import { useState } from 'react';
 import { Button, StyleSheet, Text, TextInput, TouchableHighlight, View } from 'react-native';
-import DescriptionIcon from './../../../assets/description.svg';
+import DescriptionIcon from './../../../assets/images/description.svg';
 import React from "react";
 
 const Description = ({ description,handleChange }:{description:string,handleChange:any}) => {

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Alert, Modal, StyleSheet, Text, View, Image, TextInput, TouchableHighlight } from "react-native";
-import CloseModal from './../../../assets/close_modal.svg';
+import CloseModal from './../../../assets/images/close_modal.svg';
 import DropDownPicker from 'react-native-dropdown-picker';
 import { useDispatch } from "react-redux";
 import { addTask } from "./taskSlice";
@@ -58,7 +58,7 @@ const AddTask = ({ modalVisible, setModalVisible, taskAdded }: { modalVisible: a
                     <TouchableHighlight onPress={() => { setModalVisible(false) }}>
                         <CloseModal style={styles.closeModal} />
                     </TouchableHighlight>
-                    <Image source={require('./../../../assets/user.png')} style={styles.userWithLaptop} />
+                    <Image source={require('./../../../assets/images/user.png')} style={styles.userWithLaptop} />
                     <View style={styles.container}>
                         <Text style={styles.modalText}>My Task</Text>
                         <View style={styles.inputForm}>
