@@ -11,7 +11,6 @@ import React from "react";
 import {View,HStack, ScrollView, Pressable, Text} from 'native-base';
 
 const MyDayTasks = ({navigation}:{navigation:any}) => {
-    const [modalIsOpen, setModalIsOpen] = useState(false);
     const [task, setTask] = useState(null);
     const [allTasks, setAllTasks] = useState(useSelector((state: RootState) => state.task));
     const [rows, setRows] = useState(allTasks);
@@ -48,7 +47,7 @@ const MyDayTasks = ({navigation}:{navigation:any}) => {
 
     const list = rows && rows.length > 0 ?
         rows.map((row: any) =>
-            <TaskTable navigation={navigation} row={row} handleModal={openModal} key={row.id} />
+            <TaskTable row={row} handleModal={openModal} key={row.id} />
         ) :
         <Text>No tasks found</Text>
 

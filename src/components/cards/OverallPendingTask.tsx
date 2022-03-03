@@ -1,15 +1,15 @@
-import { Dimensions, StyleSheet, Text, View } from "react-native";
+import { Dimensions, StyleSheet} from "react-native";
 import * as Progress from 'react-native-progress';
 import React from "react";
+import {View, Text} from 'native-base';
 
 const OverallPendingTask = ({max,value}:{max:number,value:number}) => {
     const progressValue = value/max;
     const screenWidth = Dimensions.get("window").width;
-
     return (
-        <View style={styles.container}>
-            <Text style={styles.header}>OVERALL PENDING TASK</Text>
-            <Text style={styles.valueText}>{value}/{max}</Text>
+        <View flex="1" bg="white" p="4" mt="2" rounded="xl">
+            <Text fontFamily="Roboto" fontStyle="normal" fontWeight="bold" fontSize="16" lineHeight="19" letterSpacing="0.5" textTransform="uppercase">OVERALL PENDING TASK</Text>
+            <Text fontFamily="Roboto" fontStyle="normal" fontWeight="normal" fontSize="18" lineHeight="27" letterSpacing="0.5" color="#92929D" alignSelf="flex-end">{value}/{max}</Text>
             <Progress.Bar 
             progress={progressValue} 
             width={screenWidth - 60} 
@@ -22,39 +22,5 @@ const OverallPendingTask = ({max,value}:{max:number,value:number}) => {
         </View>
     )
 }
-
-
-const styles = StyleSheet.create({
-    container: {
-        display: "flex",
-        backgroundColor: "#fff",
-        padding: 20,
-        marginTop: 10,
-        borderRadius: 6,
-     
-    },
-    header : {
-        // fontFamily: 'Roboto',
-        fontStyle: 'normal',
-        fontWeight: 'bold',
-        fontSize: 16,
-        lineHeight: 19,
-        letterSpacing: 0.5,
-        textTransform: 'uppercase',
-        color: '#171725',
-    },
-    valueText : {
-        // fontFamily: 'Poppins',
-        fontStyle: 'normal',
-        fontWeight: 'normal',
-        fontSize: 18,
-        lineHeight: 27,
-        letterSpacing: 0.5,
-        textTransform: 'uppercase',
-        color: '#92929D',
-        alignSelf: "flex-end",
-    }
-
-});
 
 export default OverallPendingTask;

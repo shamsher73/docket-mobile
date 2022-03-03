@@ -1,5 +1,5 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
-import taskSlice from '../features/my-day-tasks/taskSlice';
+import taskSlice from '../screens/my-day-tasks/taskSlice';
 
 export const store = configureStore({
   reducer: {

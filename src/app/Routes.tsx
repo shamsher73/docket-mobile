@@ -1,16 +1,15 @@
 import CustomDrawerContent from "../components/CustomDrawerContent";
 import HeaderMenu from "../components/HeaderMenu";
 import HeaderRight from "../components/HeaderRight";
-import Dashboard from "../features/dashboard";
-import UserLogin from "../features/login";
-import MyDayTasks from "../features/my-day-tasks";
-import AddTask from "../features/my-day-tasks/AddTask";
+import Dashboard from "../screens/dashboard";
+import UserLogin from "../screens/login";
+import MyDayTasks from "../screens/my-day-tasks";
+import AddTask from "../screens/my-day-tasks/AddTask";
 import React from "react";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 
 const Routes = () => {
     const Drawer = createDrawerNavigator();
-
     const options = {
         headerTitle: (props:any) => <HeaderMenu {...props} />,
         headerRight: () => <HeaderRight />,
@@ -25,7 +24,7 @@ const Routes = () => {
 
     const hiddenItem = { headerShown: false, drawerItemStyle: { height: 0 } }
     return (
-        <Drawer.Navigator drawerContent={(props:any) => <CustomDrawerContent {...props} />}>
+        <Drawer.Navigator initialRouteName="Login" drawerContent={(props:any) => <CustomDrawerContent {...props} />}>
             <Drawer.Screen name="Login" component={UserLogin} options={hiddenItem} />
             <Drawer.Screen name="Dashboard" component={Dashboard} options={options} />
             <Drawer.Screen name="My Day Tasks" component={MyDayTasks} options={options} />
