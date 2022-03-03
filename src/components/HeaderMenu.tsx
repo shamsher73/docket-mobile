@@ -5,8 +5,7 @@ import React from "react";
 const HeaderMenu = (props:any) => {
 
     return (
-        <View style={styles.container}>
-            {/* <MenuIcon width={20} height={20} style={styles.menuIcon} /> */}
+        <View>
             <Text style={styles.menuText}>
                 {props.children}
             </Text>
@@ -17,11 +16,11 @@ const HeaderMenu = (props:any) => {
 const styles = StyleSheet.create({
     container: {
         flexDirection: 'row', 
-        alignItems: 'center'
+        alignItems: 'flex-start'
     },
     menuIcon: {
-        marginLeft: 10, 
-        marginRight: 10
+        // marginLeft: 10, 
+        // marginRight: 10
     },
     menuText: {
         // fontFamily: 'Roboto',

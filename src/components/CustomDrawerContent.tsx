@@ -6,7 +6,7 @@ const CustomDrawerContent = (props) => {
     const [currentRoute, setCurrentRoute] = useState('Dashboard');
     const {navigation} = props;
     return (
-        <DrawerContentScrollView {...props} style={{margin:0,padding:0}}>
+        <DrawerContentScrollView {...props} >
           <DrawerItemList {...props}   />
           <DrawerItem label="Shivam Chaudhary" onPress={() => alert('Not accessible')} style={styles.header} labelStyle={styles.headerText}/>
           <DrawerItem label="Dashboard" onPress={() => {setCurrentRoute("Dashboard");navigation.navigate('Dashboard')}} labelStyle={currentRoute == "Dashboard" ? styles.drawerContentSelected : styles.drawerContent} />
@@ -19,23 +19,26 @@ const CustomDrawerContent = (props) => {
 const styles = StyleSheet.create({
     header: {
         backgroundColor: '#5a6cd5',
-        height: 160,
+        height: 200,
         borderBottomRightRadius: 20,
         borderBottomLeftRadius: 10,
         justifyContent: 'flex-end',
-       
+        marginTop: -90,
+        marginRight:0,
+        marginLeft: 0,
     },
     headerText: {
-        // fontFamily: 'Roboto',
+        fontFamily: 'Roboto',
         fontStyle: 'normal',
-        fontWeight: 'normal',
+        fontWeight: 'bold',
         fontSize: 18,
         lineHeight: 21,
         letterSpacing: 0.1375,
         color: '#F6F6F6',
+        padding: 10,
     },
     drawerContent: {
-        // fontFamily: 'Roboto',
+        fontFamily: 'Roboto',
         fontStyle: 'normal',
         fontWeight: 'bold',
         fontSize: 16,        
@@ -44,7 +47,7 @@ const styles = StyleSheet.create({
         paddingLeft: 20
     },
     drawerContentSelected: {
-        // fontFamily: 'Roboto',
+        fontFamily: 'Roboto',
         fontStyle: 'normal',
         fontWeight: 'bold',
         fontSize: 16,

@@ -17,11 +17,10 @@ const Routes = () => {
         drawerItemStyle: { height: 0 },
         headerStyle: {
             backgroundColor: '#5a6cd5',
+            borderBottomRightRadius: 20,
+            borderBottomLeftRadius: 20,
         },
         headerTintColor: '#fff',
-        // headerTitleStyle: {
-        //     fontWeight: 'bold',
-        // },
     }
 
     const hiddenItem = { headerShown: false, drawerItemStyle: { height: 0 } }

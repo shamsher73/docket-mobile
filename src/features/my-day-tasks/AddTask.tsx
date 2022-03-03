@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { Alert, Modal, StyleSheet, Text, View, Image, TextInput, TouchableHighlight } from "react-native";
+import { Modal, TextInput, TouchableHighlight, TouchableOpacity, TouchableWithoutFeedback } from "react-native";
 import CloseModal from './../../../assets/images/close_modal.svg';
 import DropDownPicker from 'react-native-dropdown-picker';
 import { useDispatch } from "react-redux";
 import { addTask } from "./taskSlice";
+import { View, Image, Text, Pressable } from 'native-base';
 
-const AddTask = ({ modalVisible, setModalVisible, taskAdded }: { modalVisible: boolean, setModalVisible: amy, taskAdded: any }) => {
+const AddTask = ({ modalVisible, setModalVisible, taskAdded }: { modalVisible: boolean, setModalVisible: any, taskAdded: any }) => {
     const [open, setOpen] = useState(false);
     const [selectedOption, setSelectedOption] = useState('');
     const [items, setItems] = useState([
@@ -49,108 +50,52 @@ const AddTask = ({ modalVisible, setModalVisible, taskAdded }: { modalVisible: b
             transparent={true}
             visible={modalVisible}
             onRequestClose={() => {
-                Alert.alert("Modal has been closed.");
                 setModalVisible(!modalVisible);
-            }}
-        >
+            }}>
             <View>
-                <View style={styles.modalView}>
-                    <TouchableHighlight onPress={() => { setModalVisible(false) }}>
-                        <CloseModal style={styles.closeModal} />
-                    </TouchableHighlight>
-                    <Image source={require('./../../../assets/images/user.png')} style={styles.userWithLaptop} />
-                    <View style={styles.container}>
-                        <Text style={styles.modalText}>My Task</Text>
-                        <View style={styles.inputForm}>
-                            <Text style={styles.label}>TASK</Text>
-                            <TextInput style={styles.input} onChangeText={(text: string) => { setTask(text) }} />
-                        </View>
-                        <View style={styles.inputForm}>
-                            <Text style={styles.label}>CATEGORY</Text>
-
-                            <DropDownPicker
-                                open={open}
-                                value={selectedOption}
-                                items={items}
-                                setOpen={setOpen}
-                                setValue={setSelectedOption}
-                                setItems={setItems}
-                            />
-
-                        </View>
-                        <TouchableHighlight onPress={() => { createTask() }} style={styles.buttonContainer}>
-                            <View style={styles.button}>
-                                <Text style={styles.buttonText}>Add Task</Text>
+                <TouchableOpacity
+                    style={{ backgroundColor: 'rgba(0,0,0,0.5)' }}
+                    activeOpacity={0.1}
+                    onPressOut={() => setModalVisible(!modalVisible)}>
+                    <View mt="80%" bottom="0" height="80%" bg="white" borderRadius="40">
+                        <TouchableWithoutFeedback>
+                            <View>
+                                <TouchableHighlight onPress={() => { setModalVisible(false) }}>
+                                    <CloseModal style={{ alignSelf: 'center', padding: 10 }} />
+                                </TouchableHighlight>
+                                <Image source={require('./../../../assets/images/user.png')} alignSelf="center" alt="user icon"/>
+                                <View p="4">
+                                    <Text fontFamily="Roboto" fontStyle="normal" fontWeight="bold" fontSize="20" lineHeight="23">My Task</Text>
+                                    <View mt="4" mb="4">
+                                        <Text fontFamily="Roboto" fontStyle="normal" fontWeight="normal" fontSize="12" lineHeight="14" color="#92929D">TASK</Text>
+                                        <TextInput style={{ borderBottomWidth: 1, borderBottomColor: '#E2E2EA' }} onChangeText={(text: string) => { setTask(text) }} />
+                                    </View>
+                                    <View mt="4" mb="4">
+                                        <Text fontFamily="Roboto" fontStyle="normal" fontWeight="normal" fontSize="12" lineHeight="14" color="#92929D">CATEGORY</Text>
+                                        <DropDownPicker
+                                            open={open}
+                                            value={selectedOption}
+                                            items={items}
+                                            setOpen={setOpen}
+                                            setValue={setSelectedOption}
+                                            setItems={setItems}
+                                            placeholder="Select Category"
+                                            style={{ borderBottomWidth: 1, borderWidth: 0,  borderBottomColor: '#E2E2EA' }}
+                                        />
+                                    </View>
+                                    <Pressable onPress={() => { createTask() }} mt="20">
+                                        <View p="3" bg="#6895E6"  borderRadius="8" alignItems="center">
+                                            <Text fontFamily="Roboto" fontStyle="normal" fontWeight="bold" fontSize="16" lineHeight="19" color="white">Add Task</Text>
+                                        </View>
+                                    </Pressable>
+                                </View>
                             </View>
-                        </TouchableHighlight>
-
+                        </TouchableWithoutFeedback>
                     </View>
-                </View>
+                </TouchableOpacity>
             </View>
         </Modal>
     );
 }
-
-const styles = StyleSheet.create({
-    modalView: {
-        marginTop: '80%',
-        bottom: 0,
-        height: '80%',
-
-        backgroundColor: "white",
-        borderRadius: 38,
-    },
-    closeModal: {
-        alignSelf: 'center',
-        padding: 10,
-    },
-    userWithLaptop: {
-        alignSelf: 'center',
-        marginTop: 30,
-    },
-    modalText: {
-        //fontFamily: 'Roboto',
-        fontStyle: 'normal',
-        fontWeight: 'bold',
-        fontSize: 20,
-        lineHeight: 23,
-        color: '#171725',
-    },
-    container: {
-        padding: 20,
-    },
-    inputForm: {
-        marginTop: 10,
-        marginBottom: 10,
-    },
-    label: {
-        //fontFamily: 'Roboto',
-        fontStyle: 'normal',
-        fontWeight: 'normal',
-        fontSize: 12,
-        lineHeight: 14,
-        color: '#92929D',
-    },
-    input: {
-        borderBottomWidth: 1,
-        borderBottomColor: '#E2E2EA',
-    },
-    button: {
-        bottom: 0,
-        borderRadius: 8,
-        backgroundColor: '#6895E6',
-        padding: 10,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    buttonText: {
-        //fontFamily: 'Roboto',
-        fontStyle: 'normal',
-        fontWeight: 'bold',
-        fontSize: 16,
-        lineHeight: 19,
-        color: '#FAFAFB',
-    }
-});
 
 export default AddTask;

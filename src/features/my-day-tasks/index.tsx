@@ -2,14 +2,13 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../app/store";
 import FilterIcon from './../../../assets/images/filter.svg';
 import { useState } from "react";
-import { StyleSheet, Text, TouchableHighlight } from "react-native";
 import Filter from "../../components/Filter";
 import TaskTable from '../../components/TaskTable';
 import Add from './../../../assets/images/addicon.svg';
 import AddTask from './AddTask';
 import TaskModal from "../../components/TaskModal";
 import React from "react";
-import {View,HStack, ScrollView} from 'native-base';
+import {View,HStack, ScrollView, Pressable, Text} from 'native-base';
 
 const MyDayTasks = ({navigation}:{navigation:any}) => {
     const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -66,30 +65,15 @@ const MyDayTasks = ({navigation}:{navigation:any}) => {
             <ScrollView>
                 {list}
             </ScrollView>
-            <TouchableHighlight onPress={() => setModalVisible(true)} style={styles.add}>
-                <View>
+            <Pressable onPress={() => setModalVisible(true)}>
+                <View position="absolute" right="5" bottom="5" width="20" height="20" bg="#6b8ae6" borderRadius="40" justifyContent="center" alignItems="center">
                     <Add />
                 </View>
-            </TouchableHighlight>
+            </Pressable>
             <AddTask modalVisible={modalVisible} setModalVisible={setModalVisible} taskAdded={taskAdded}/>
             <TaskModal taskTemp={task} taskUpdated={taskUpdated} modalVisibleEdit={modalVisibleEdit} setModalVisibleEdit={setModalVisibleEdit}/>
         </View>
     )
 }
-
-const styles = StyleSheet.create({
-    add: {
-        position: "absolute",
-        right: 10,
-        bottom: 20,
-        width: 60,
-        height: 60,
-        borderRadius: 30,
-        backgroundColor: "#6b8ae6",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-    },
-})
 
 export default MyDayTasks;
