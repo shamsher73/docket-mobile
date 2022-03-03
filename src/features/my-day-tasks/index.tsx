@@ -9,12 +9,11 @@ import { RootState } from "../../app/store";
 import FilterIcon from './../../../assets/images/filter.svg';
 
 import { useState } from "react";
-import { StyleSheet, Text, View, Modal, Pressable, Alert } from "react-native";
+import { StyleSheet, Text, View, Modal, Pressable, Alert, TouchableHighlight } from "react-native";
 import Filter from "../../components/Filter";
 import TaskTable from '../../components/TaskTable';
 import Add from './../../../assets/images/addicon.svg';
 import AddTask from './AddTask';
-import { logger } from "react-native-logs";
 import TaskModal from "../../components/TaskModal";
 import React from "react";
 
@@ -30,8 +29,6 @@ const MyDayTasks = ({navigation}) => {
     const [modalVisibleEdit, setModalVisibleEdit] = useState(false);
 
 
-          var log = logger.createLogger();
-    // log.info("in index view");
     const openModal = (task:any) => {
         setTask(task);
         setModalVisibleEdit(true);
@@ -88,9 +85,11 @@ const MyDayTasks = ({navigation}) => {
 
                 }
             </View>
-            <View style={styles.add} >
-                <Add onPress={() => setModalVisible(true)}/>
-            </View>
+            <TouchableHighlight onPress={() => setModalVisible(true)} style={styles.add} >
+                <View>
+                    <Add />
+                </View>
+            </TouchableHighlight>
             <AddTask modalVisible={modalVisible} setModalVisible={setModalVisible} taskAdded={taskAdded}/>
             <TaskModal taskTemp={task} taskUpdated={taskUpdated} modalVisibleEdit={modalVisibleEdit} setModalVisibleEdit={setModalVisibleEdit}/>
         </View>

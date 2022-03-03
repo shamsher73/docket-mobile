@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { removeTask, updateTask } from "../features/my-day-tasks/taskSlice";
 import CloseIcon from './../../assets/images/close.svg';
 import TaskTitle from "./view-task/TaskTitle";
-import { logger } from "react-native-logs";
 import Description from "./view-task/Description";
 import { useEffect } from "react";
 import DeleteIcon from './../../assets/images/delete.svg';

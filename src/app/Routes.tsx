@@ -6,8 +6,11 @@ import UserLogin from "../features/login";
 import MyDayTasks from "../features/my-day-tasks";
 import AddTask from "../features/my-day-tasks/AddTask";
 import React from "react";
+import { createDrawerNavigator } from "@react-navigation/drawer";
 
-const Routes = ({ Drawer }: { Drawer: any }) => {
+const Routes = () => {
+    const Drawer = createDrawerNavigator();
+
     const options = {
         headerTitle: (props:any) => <HeaderMenu {...props} />,
         headerRight: () => <HeaderRight />,
@@ -16,9 +19,9 @@ const Routes = ({ Drawer }: { Drawer: any }) => {
             backgroundColor: '#5a6cd5',
         },
         headerTintColor: '#fff',
-        headerTitleStyle: {
-            fontWeight: 'bold',
-        },
+        // headerTitleStyle: {
+        //     fontWeight: 'bold',
+        // },
     }
 
     const hiddenItem = { headerShown: false, drawerItemStyle: { height: 0 } }

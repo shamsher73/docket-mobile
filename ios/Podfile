@@ -13,7 +13,6 @@ target 'DocketApp' do
   )
 
 
-  pod 'RNGestureHandler', :path => '../node_modules/react-native-gesture-handler'
 
   target 'DocketAppTests' do
     inherit! :complete

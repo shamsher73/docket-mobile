@@ -26,7 +26,7 @@ const TotalHoursChart = ({categories}:{categories:Array<Category>}):JSX.Element 
         <View style={styles.container}>
             <View>
               <Text style={styles.header}>TOTAL WORKING HOURS</Text>
-              <PieChart style={{ height: 200 }} data={pieData} outerRadius="80%" innerRadius="90" padAngle="0"/>
+              <PieChart style={{ height: 200 }} data={pieData} outerRadius="80%" innerRadius="90" padAngle={0}/>
               <Text style={styles.chartValue}>94%</Text>
             </View>
             <View>
