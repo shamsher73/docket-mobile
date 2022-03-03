@@ -1,48 +1,16 @@
-
-import { useState } from 'react';
-import { Button, StyleSheet, Text, TextInput, TouchableHighlight, View } from 'react-native';
 import OvalIcon from './../../../assets/images/oval.svg';
 import React from "react";
+import { View } from 'native-base';
+import TextChanger from './TextChanger';
 
-const TaskTitle = ({ title,handleChange }:{title:string,handleChange:any}) => {
-    const [isOpen, setIsOpen] = useState(false);
-    const [newTitle, setNewTitle] = useState('');
-
+const TaskTitle = ({ title, handleChange }: { title: string, handleChange: any }) => {
     return (
-        <View style={styles.container}>
-            <OvalIcon/>
-            <View style={styles.subContainer}>
-                <Text style={styles.subText}>{title ? title : "-"}</Text>
+        <View flex="1" flexDirection="row" borderBottomWidth="1" borderBottomColor="#E2E2EA" pt="2" pb="2">
+            <View pl="3" justifyContent="center">
+                <OvalIcon />
             </View>
-            
+            <TextChanger value={title} changeKey="" handleChange={handleChange} title="" />
         </View>
     );
 }
-
-const styles = StyleSheet.create({
-    container: {
-        display: "flex",
-        flexDirection: "row",
-        backgroundColor: "#fff",
-        borderBottomWidth: 1,
-        borderBottomColor: "#E2E2EA",
-        padding: 12,
-    },
-   
-    subContainer: {
-        display: "flex",
-        paddingLeft: 14,
-    },
-   
-    subText: {
-        // fontFamily: "Roboto",
-        fontStyle: "normal",
-        fontWeight: "bold",
-        fontSize: 14,
-        lineHeight: 16,
-        letterSpacing: 0.1,
-        color: "#44444F",
-    }
-});
-
 export default TaskTitle;
