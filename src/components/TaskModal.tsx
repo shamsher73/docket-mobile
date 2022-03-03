@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: "column",
         height: '100%',
-        paddingTop: 30,
+        paddingTop: 50,
         padding:20,
         backgroundColor: "white",
         borderRadius: 38,
