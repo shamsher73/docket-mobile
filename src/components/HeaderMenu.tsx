@@ -1,37 +1,11 @@
-import { StyleSheet, Text, View } from "react-native";
-import MenuIcon from './../../assets/images/menu-icon.svg';
 import React from "react";
+import {View, Text} from 'native-base';
 
-const HeaderMenu = (props:any) => {
-
-    return (
+const HeaderMenu = (props:any) => (
         <View>
-            <Text style={styles.menuText}>
+            <Text fontFamily="Roboto" fontStyle="normal" fontWeight="bold" fontSize="22" lineHeight="26" letterSpacing="0.13" color="#F6F6F6">
                 {props.children}
             </Text>
         </View>
     );
-};
-
-const styles = StyleSheet.create({
-    container: {
-        flexDirection: 'row', 
-        alignItems: 'flex-start'
-    },
-    menuIcon: {
-        // marginLeft: 10, 
-        // marginRight: 10
-    },
-    menuText: {
-        // fontFamily: 'Roboto',
-        fontStyle: 'normal',
-        fontWeight: 'bold',
-        fontSize: 22,
-        lineHeight: 26,
-        letterSpacing: 0.1375,
-        color: '#F6F6F6',
-        marginRight: 10
-    }
-});
-    
 export default HeaderMenu;

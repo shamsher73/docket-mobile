@@ -1,8 +1,10 @@
 import { useState } from "react";
-import { StyleSheet, Text, TouchableHighlight, View } from "react-native";
+import {TouchableHighlight } from "react-native";
 import Unchecked from './../../assets/images/unchecked.svg';
 import Checked from './../../assets/images/checked.svg';
 import React from "react";
+import {View, Text} from 'native-base';
+
 interface SubTask {
     title: string
     startTime: string
@@ -25,25 +27,18 @@ interface TaskState {
     status: string
 }
 
-const TaskTable = ({navigation,row,handleModal}:{navigation:any,row:TaskState,handleModal:any}) => {
+const TaskTable = ({row,handleModal}:{row:TaskState,handleModal:any}) => {
     const [selected, setSelected] = useState(false);
-    const onPressButto = () => {
-        setSelected(!selected);
-    }
-
     return (
-        <View style={selected ? styles.containerSelected : styles.container }>
-            <TouchableHighlight onPress={() =>
-                        handleModal(row)
-                    }
-            >
+        <View flex="1" flexDirection="row" bg={selected ? "#F6FFFB" : "#EDF1F9"} justifyContent="space-between" p="3" mt="2" shadow="0.05">
+            <TouchableHighlight onPress={() => handleModal(row)}>
                 <View>
-                    <Text style={styles.taskText}>{row.task}</Text>
-                    <Text style={styles.taskCategory}>{row.category}</Text>
+                    <Text fontFamily="Roboto" fontStyle="normal" fontSize="16" fontWeight="bold" letterSpacing="0.5">{row.task}</Text>
+                    <Text fontFamily="Roboto" fontStyle="normal" fontSize="14" fontWeight="normal" letterSpacing="0.2" lineHeight="21" color="#171725">{row.category}</Text>
                 </View>
             </TouchableHighlight>
-            <View style={styles.selector}>
-                <TouchableHighlight onPress={() => onPressButto()} underlayColor="white">
+            <View flex="1" justifyContent="center" alignItems="flex-end" >
+                <TouchableHighlight onPress={() => setSelected(!selected)} underlayColor="white">
                     {
                         selected ? <Checked /> : <Unchecked />
                     }
@@ -52,53 +47,5 @@ const TaskTable = ({navigation,row,handleModal}:{navigation:any,row:TaskState,ha
         </View>
     )
 }
-
-const styles = StyleSheet.create({
-    container: {
-        display: "flex",
-        flexDirection: "row",
-        justifyContent: "space-between",
-        backgroundColor: "#EDF1F9",
-        borderWidth: 1,
-        borderColor: "#EDF1F9",
-        borderRadius: 6,
-        padding: 12,
-        marginTop: 5,
-    },
-    containerSelected: {
-        display: "flex",
-        flexDirection: "row",
-        justifyContent: "space-between",
-        backgroundColor: "#F6FFFB",
-        borderWidth: 1,
-        borderColor: "#F6FFFB",
-        borderRadius: 6,
-        padding: 12,
-        marginTop: 5,
-    },
-    taskText: {
-        // fontFamily: "Roboto",
-        fontStyle: "normal",
-        fontWeight: "bold",
-        fontSize: 16,
-        lineHeight: 19,
-        letterSpacing: 0.5,
-        color: "#171725",
-    },
-    taskCategory: {
-        // fontFamily: "Poppins",
-        fontStyle: "normal",
-        fontWeight: "normal",
-        fontSize: 14,
-        lineHeight: 21,
-        letterSpacing: 0.2,
-        color: "#171725",
-    },
-    selector: {
-        display: "flex",
-        justifyContent: "center",
-        borderRadius: 10,
-    }
-})
 
 export default TaskTable;
