@@ -69,8 +69,8 @@ const TaskModal = ({taskTemp,taskUpdated,modalVisibleEdit,setModalVisibleEdit}:{
                         <CategoryName category={taskCurrent.category} handleChange={editTask}/>
                         <Priority priority={taskCurrent.priority} />
                         <Tags tags={taskCurrent.tags} handleChange={updateTag}/>
-                        <DueDate dueDate={taskCurrent.due_date} handleChange={() => {}}/>
-                        <RemindMe date={taskCurrent.remind_me} handleChange={() => {}}/>
+                        <DueDate dueDate={taskCurrent.due_date} handleChange={editTask}/>
+                        <RemindMe date={taskCurrent.remind_me} handleChange={editTask}/>
                         <Repeat repeat={taskCurrent.repeat} handleChange={() => {}}/> 
                     </ScrollView>
                     <View bg="white" flex="1" flexDirection="row" justifyContent="space-between" alignItems="center" pr="5" pl="5" shadow="6">
