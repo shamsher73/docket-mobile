@@ -5,7 +5,7 @@ import DropDownPicker from 'react-native-dropdown-picker';
 import { useDispatch } from "react-redux";
 import { addTask } from "./taskSlice";
 
-const AddTask = ({ modalVisible, setModalVisible, taskAdded }: { modalVisible: any, setModalVisible: any, taskAdded: any }) => {
+const AddTask = ({ modalVisible, setModalVisible, taskAdded }: { modalVisible: boolean, setModalVisible: amy, taskAdded: any }) => {
     const [open, setOpen] = useState(false);
     const [selectedOption, setSelectedOption] = useState('');
     const [items, setItems] = useState([

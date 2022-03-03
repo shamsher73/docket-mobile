@@ -1,42 +1,28 @@
-// import TaskTable from "../../components/table/TaskTable";
-// import TaskHeader from "../../components/TaskHeader";
-// import TaskCreationForm from "../../components/TaskCreationForm";
-// import { useState } from "react";
-// import Modal from 'react-modal';
-// import TaskModal from "../../components/TaskModal";
 import { useSelector } from "react-redux";
 import { RootState } from "../../app/store";
 import FilterIcon from './../../../assets/images/filter.svg';
-
 import { useState } from "react";
-import { StyleSheet, Text, View, Modal, Pressable, Alert, TouchableHighlight } from "react-native";
+import { StyleSheet, Text, TouchableHighlight } from "react-native";
 import Filter from "../../components/Filter";
 import TaskTable from '../../components/TaskTable';
 import Add from './../../../assets/images/addicon.svg';
 import AddTask from './AddTask';
 import TaskModal from "../../components/TaskModal";
 import React from "react";
+import {View,HStack, ScrollView} from 'native-base';
 
-const MyDayTasks = ({navigation}) => {
+const MyDayTasks = ({navigation}:{navigation:any}) => {
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [task, setTask] = useState(null);
     const [allTasks, setAllTasks] = useState(useSelector((state: RootState) => state.task));
-
     const [rows, setRows] = useState(allTasks);
-            
     const [filter, setFilter] = useState('all');
     const [modalVisible, setModalVisible] = useState(false);
     const [modalVisibleEdit, setModalVisibleEdit] = useState(false);
 
-
     const openModal = (task:any) => {
         setTask(task);
         setModalVisibleEdit(true);
-    }
-
-    const closeModal = () => {
-        setTask(null);
-        setModalVisibleEdit(false);
     }
 
     const changeFilter = (filter:string) => {
@@ -61,31 +47,26 @@ const MyDayTasks = ({navigation}) => {
         setRows([...rows.slice(0, index), task, ...rows.slice(index + 1)]);
     }
 
+    const list = rows && rows.length > 0 ?
+        rows.map((row: any) =>
+            <TaskTable navigation={navigation} row={row} handleModal={openModal} key={row.id} />
+        ) :
+        <Text>No tasks found</Text>
 
     return (
-        <View style={styles.container}>
-            <View style={styles.header}>
-                <View style={styles.filter}>
+        <View p="3" flex="1">
+            <HStack>
+                <View flex="1">
                     <Filter filter={filter} filterValues={['all','pending','completed']} filterHandler={changeFilter} />
                 </View>
-                <View style={styles.filterIcon}>
+                <View justifyContent="center" bg="white" rounded="xl" p="3" ml="1">
                     <FilterIcon />
                 </View>
-            </View>
-            <View>
-                {
-                    rows && rows.length > 0 ?
-                    rows.map((row:any) => {
-                        return (
-                            <TaskTable navigation={navigation} row={row} handleModal={openModal} key={row.id}/>
-                        )
-                    }):
-                    <Text>No tasks found</Text>
-                    
-
-                }
-            </View>
-            <TouchableHighlight onPress={() => setModalVisible(true)} style={styles.add} >
+            </HStack>
+            <ScrollView>
+                {list}
+            </ScrollView>
+            <TouchableHighlight onPress={() => setModalVisible(true)} style={styles.add}>
                 <View>
                     <Add />
                 </View>
@@ -97,26 +78,6 @@ const MyDayTasks = ({navigation}) => {
 }
 
 const styles = StyleSheet.create({
-    container:{
-        display: "flex",
-        padding: 10,
-        height: "100%",
-    },
-    header: {
-        display: "flex",
-        flexDirection: "row",
-        justifyContent: "space-between",
-    },
-    filter:{
-        flex: 1,
-        marginRight: 10,
-    },
-    filterIcon: {
-        padding: 10,
-        justifyContent: "center",
-        backgroundColor: "#fff",
-        borderRadius: 5,
-    },
     add: {
         position: "absolute",
         right: 10,

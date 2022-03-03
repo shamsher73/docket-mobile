@@ -1,79 +1,32 @@
-import { Button, Pressable, StyleSheet, Text, View } from "react-native";
+import {Pressable} from "react-native";
 import GoogleIcon from './../../../assets/images/Google.svg';
 import UserOnDesk from './../../../assets/images/user-on-desk.svg';
 import GeekyAntsLogo from './../../../assets/images/geeky-logo.svg';
 import React from "react";
+import {VStack, Text,HStack, View } from 'native-base';
 
-const UserLogin = ({ navigation }: { navigation: any }) => {
+const UserLogin = ({ navigation }: { navigation: any }):JSX.Element => {
     return (
-        <View style={styles.container}>
-            
-            <UserOnDesk style={styles.userDesk}/>
-            <View >
+        <VStack p="4" bg="#d0d7ed" flex={1} justifyContent="center">
+            <View justifyContent="center">
+                <UserOnDesk width={300} height={300}/>
+            </View>
+            <View justifyContent="flex-start" p="2">
                 <GeekyAntsLogo />
-                <Text style={styles.loginText}>Log In to Your Account</Text>
+                <Text fontStyle="normal" fontSize="20" fontWeight="600" fontFamily="Poppins">Log In to Your Account</Text>
                 <Pressable
                     onPress={() =>
                         navigation.navigate('Dashboard')
                     }
-                    style={styles.buttonGoogle}
                 >
-                    <GoogleIcon width={20} height={20} style={styles.googleIcon} />
-                    <Text style={styles.buttonText}>Continue with Google</Text>
+                    <HStack bg="#fc5a5a" justifyContent="center" p="2" rounded="xl">
+                        <GoogleIcon width={20} height={20}/>
+                        <Text pl="2" fontStyle="normal" fontSize="16" fontWeight="600" lineHeight="24" fontFamily="Poppins" color="white">Continue with Google</Text>
+                    </HStack>
                 </Pressable>
             </View>
-        </View>
-
+        </VStack>
     );
 }
-
-const styles = StyleSheet.create({
-    container: {
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        padding: 20,
-        height: '100%',
-        backgroundColor: '#d0d7ed',
-    },
-    userDesk : {
-        maxHeight: 300,
-        maxWidth: 300,
-        alignSelf: 'center',
-    },
-    loginText: {
-        // fontFamily: "Poppins-Bold",
-        fontStyle: "normal",
-        fontWeight: "bold",
-        fontSize: 20,
-        lineHeight: 30,
-        letterSpacing: 0.105,
-        color: '#232324',
-
-    },
-    buttonGoogle: {
-        backgroundColor: '#FC5A5A',
-        borderRadius: 12,
-        paddingLeft: 20,
-        paddingRight: 20,
-        paddingTop: 10,
-        paddingBottom: 10,
-        alignItems: 'center',
-        flexDirection: 'row',
-        justifyContent: 'center',
-    },
-    buttonText: {
-        // fontFamily: 'Poppins',
-        fontStyle: 'normal',
-        fontWeight: 'bold',
-        fontSize: 16,
-        lineHeight: 24,
-        textAlign: 'center',
-        color: '#FFFFFF',
-    },
-    googleIcon: {
-        marginRight: 10,
-    }
-});
 
 export default UserLogin;
