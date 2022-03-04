@@ -16,7 +16,7 @@ import Repeat from "./view-task/Repeat";
 import { View, Text, ScrollView } from 'native-base';
 
 
-const TaskModal = ({taskTemp,taskUpdated,modalVisibleEdit,setModalVisibleEdit}:{taskTemp:any,taskUpdated:any,modalVisibleEdit:any,setModalVisibleEdit:any}) => {
+const TaskModal = ({taskTemp,taskUpdated,modalVisibleEdit,setModalVisibleEdit,taskRemoved}:{taskTemp:any,taskUpdated:any,modalVisibleEdit:any,setModalVisibleEdit:any,taskRemoved:any}) => {
     const dispatch = useDispatch()
     const [taskCurrent, setTaskCurrent] = useState(taskTemp)
     const [load, setLoad] = useState(false)
@@ -38,6 +38,7 @@ const TaskModal = ({taskTemp,taskUpdated,modalVisibleEdit,setModalVisibleEdit}:{
     }
 
     const deleteTask = () => {
+        taskRemoved(taskCurrent)
         dispatch(removeTask({id : taskCurrent.id}))
         setModalVisibleEdit(false)
     }

@@ -45,6 +45,12 @@ const MyDayTasks = ({navigation}:{navigation:any}) => {
         setRows([...rows.slice(0, index), task, ...rows.slice(index + 1)]);
     }
 
+    const taskRemoved = (task:any) => {
+        const index = allTasks.findIndex(t => t.id === task.id);
+        setAllTasks([...allTasks.slice(0, index), ...allTasks.slice(index + 1)]);
+        setRows([...rows.slice(0, index), ...rows.slice(index + 1)]);
+    }
+
     const list = rows && rows.length > 0 ?
         rows.map((row: any) =>
             <TaskTable row={row} handleModal={openModal} key={row.id} />
@@ -70,7 +76,7 @@ const MyDayTasks = ({navigation}:{navigation:any}) => {
                 </View>
             </Pressable>
             <AddTask modalVisible={modalVisible} setModalVisible={setModalVisible} taskAdded={taskAdded}/>
-            <TaskModal taskTemp={task} taskUpdated={taskUpdated} modalVisibleEdit={modalVisibleEdit} setModalVisibleEdit={setModalVisibleEdit}/>
+            <TaskModal taskTemp={task} taskUpdated={taskUpdated} modalVisibleEdit={modalVisibleEdit} setModalVisibleEdit={setModalVisibleEdit} taskRemoved={taskRemoved}/>
         </View>
     )
 }
