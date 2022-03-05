@@ -12,7 +12,7 @@ const CategoryName = ({ category,handleChange }:{category:string,handleChange:an
             <View pl="3" justifyContent="center">
                 <CategoryIcon />
             </View>
-            <TextChanger value={category} changeKey="category" handleChange={handleChange} title="category"/>
+            <TextChanger value={category} changeKey="categoryName" handleChange={handleChange} title="category"/>
         </View>
     );
 }

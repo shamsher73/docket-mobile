@@ -16,29 +16,23 @@ import Repeat from "./view-task/Repeat";
 import { View, Text, ScrollView } from 'native-base';
 
 
-const TaskModal = ({taskTemp,taskUpdated,modalVisibleEdit,setModalVisibleEdit,taskRemoved}:{taskTemp:any,taskUpdated:any,modalVisibleEdit:any,setModalVisibleEdit:any,taskRemoved:any}) => {
+const TaskModal = ({task,modalVisibleEdit,setModalVisibleEdit}:{task:any,modalVisibleEdit:any,setModalVisibleEdit:any}) => {
     const dispatch = useDispatch()
-    const [taskCurrent, setTaskCurrent] = useState(taskTemp)
-    const [load, setLoad] = useState(false)
-
+    const [taskCurrent, setTaskCurrent] = useState(task)
     useEffect(() => {
-        setTaskCurrent(taskTemp)
-        setLoad(true)
-    }, [taskTemp])
-
-
+        setTaskCurrent(task)
+    }, [task])
+    
     const updateTag = (tags:Array<string>) => {
         setTaskCurrent({...taskCurrent, tags: tags})
     }
 
     const save = () => {
-        taskUpdated(taskCurrent)
         dispatch(updateTask({...taskCurrent}))
         setModalVisibleEdit(false)
     }
 
     const deleteTask = () => {
-        taskRemoved(taskCurrent)
         dispatch(removeTask({id : taskCurrent.id}))
         setModalVisibleEdit(false)
     }
@@ -57,7 +51,7 @@ const TaskModal = ({taskTemp,taskUpdated,modalVisibleEdit,setModalVisibleEdit,ta
             }}
         >
             {
-                (load && taskCurrent ?
+                (taskCurrent ?
                 (
                 <View flex="1" bottom="0"  mt="10" borderTopLeftRadius="20">
                     <View p="4" justifyContent="space-between" flexDirection="row" borderTopLeftRadius="20" borderTopRightRadius="20" bg="white">
@@ -65,13 +59,13 @@ const TaskModal = ({taskTemp,taskUpdated,modalVisibleEdit,setModalVisibleEdit,ta
                         <CloseIcon onPress={() =>setModalVisibleEdit(false) }/>
                     </View>
                     <ScrollView height="4/5" bg="white">
-                        <TaskTitle title={taskCurrent.task} handleChange={() => {}}/>
+                        <TaskTitle title={taskCurrent.name} handleChange={() => {}}/>
                         <Description description={taskCurrent.description} handleChange={editTask}/>
-                        <CategoryName category={taskCurrent.category} handleChange={editTask}/>
+                        <CategoryName category={taskCurrent.categoryName} handleChange={editTask}/>
                         <Priority priority={taskCurrent.priority} />
                         <Tags tags={taskCurrent.tags} handleChange={updateTag}/>
-                        <DueDate dueDate={taskCurrent.due_date} handleChange={editTask}/>
-                        <RemindMe date={taskCurrent.remind_me} handleChange={editTask}/>
+                        <DueDate dueDate={taskCurrent.dueDate} handleChange={editTask}/>
+                        <RemindMe date={taskCurrent.reminderDate} handleChange={editTask}/>
                         <Repeat repeat={taskCurrent.repeat} handleChange={() => {}}/> 
                     </ScrollView>
                     <View bg="white" flex="1" flexDirection="row" justifyContent="space-between" alignItems="center" pr="5" pl="5" shadow="6">
