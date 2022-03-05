@@ -14,11 +14,11 @@ interface SubTask {
 
 interface TaskState {
     id:number
-    task: string
+    name: string
     description: string
     priority: string
     subTasks: SubTask[]
-    category: string | never
+    categoryName: string | never
     tags: string[]
     time: number
     due_date: string
@@ -33,8 +33,8 @@ const TaskTable = ({row,handleModal}:{row:TaskState,handleModal:any}) => {
         <View flex="1" flexDirection="row" bg={selected ? "#F6FFFB" : "#EDF1F9"} justifyContent="space-between" p="3" mt="2" shadow="0.05">
             <TouchableHighlight onPress={() => handleModal(row)}>
                 <View>
-                    <Text fontFamily="Roboto" fontStyle="normal" fontSize="16" fontWeight="bold" letterSpacing="0.5">{row.task}</Text>
-                    <Text fontFamily="Roboto" fontStyle="normal" fontSize="14" fontWeight="normal" letterSpacing="0.2" lineHeight="21" color="#171725">{row.category}</Text>
+                    <Text fontFamily="Roboto" fontStyle="normal" fontSize="16" fontWeight="bold" letterSpacing="0.5">{row.name}</Text>
+                    <Text fontFamily="Roboto" fontStyle="normal" fontSize="14" fontWeight="normal" letterSpacing="0.2" lineHeight="21" color="#171725">{row.categoryName}</Text>
                 </View>
             </TouchableHighlight>
             <View flex="1" justifyContent="center" alignItems="flex-end" >

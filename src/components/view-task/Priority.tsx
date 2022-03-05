@@ -4,19 +4,22 @@ import React from "react";
 
 const Priority = ({priority}:{priority:string}) => {
 
-    const Priorities = ["High","Medium","Low"];
+    const Priorities = ["urgent","high","medium","low"];
     return (
         <View style={styles.container}>
             <PriorityIcon/>
             <View style={styles.subContainer}>
                 <Text style={styles.headerText}>PRIORITY</Text>
-                <View style={styles.priorities}>
-                    <Text style={styles.subText}>Urgent</Text>
-                    <Text style={styles.subTextUnselected}>Urgent</Text>
-                    <Text style={styles.subTextUnselected}>Urgent</Text>
+                <View  style={styles.priorities}>
+                {
+                    Priorities.map((priorit, index) => {
+                        return (
+                            <Text style={(priorit === priority) ? styles.subText : styles.subTextUnselected} key={index}>{priorit}</Text>
+                        )
+                    })
+                }
                 </View>
             </View>
-            
         </View>
     );
 }
@@ -47,6 +50,7 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         paddingLeft: 14,
         paddingRight: 14,
+        marginLeft:2,
         // fontFamily: "Roboto",
         fontStyle: "normal",
         fontWeight: "normal",
@@ -55,12 +59,14 @@ const styles = StyleSheet.create({
         letterSpacing: 0.085,
         color: "#44444F",
         alignSelf: "center",
+        textTransform: "uppercase",
     },
     subTextUnselected: {
         backgroundColor: "#F7F7F7",
         borderRadius: 10,
         paddingLeft: 14,
         paddingRight: 14,
+        marginLeft:2,
         // fontFamily: "Roboto",
         fontStyle: "normal",
         fontWeight: "normal",
@@ -69,6 +75,7 @@ const styles = StyleSheet.create({
         letterSpacing: 0.085,
         color: "#44444F",
         alignSelf: "center",
+        textTransform: "uppercase",
     },
     priorities: {
         display: "flex",

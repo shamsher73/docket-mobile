@@ -11,7 +11,7 @@ const DueDate =  ({ dueDate,handleChange }:{dueDate:string,handleChange:any}):JS
             <View pl="3" justifyContent="center">
                 <DateIcon/>
             </View>
-            <DateChanger date={dueDate} changeKey="due_date" handleChange={handleChange} title="due date" />  
+            <DateChanger date={dueDate} changeKey="dueDate" handleChange={handleChange} title="due date" />  
         </View>
     );
 }
