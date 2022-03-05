@@ -7,26 +7,34 @@ import React from "react";
 import { useState } from 'react';
 import { Button, StyleSheet, Text, TextInput, TouchableHighlight, View } from 'react-native';
 
-const Tags = ({tags,handleChange}:{tags:Array<string>,handleChange:any}):JSX.Element => {
+interface Tag {
+    name:string
+}
+const Tags = ({tags,handleChange}:{tags:Array<Tag>,handleChange:any}):JSX.Element => {
     const [addTag, setAddTag] = useState(false);
-    const [newTag, setNewTag] = useState('');
-
+    const [newTag, setNewTag] = useState({name:''});
+    // const [tagList, setTagList] = useState(tags);
+    // console.log("tags",tags);
     const createTag = ():void => {
         setAddTag(true);
     }
 
-    const createNewTag = (e:any):void => {
-        setNewTag(e.target.value);
-    }
+    // const createNewTag = (e:any):void => {
+    //     setNewTag(e.target.value);
+    // }
 
     const saveTag = ():void => {
-        tags = [...tags, newTag];
-        handleChange(tags);
+        
+        // let allTags = tags;
+        // allTags.push(newTag);
+        // setTagList([...tagList,newTag]);
+        handleChange([...tags,newTag]);
         setAddTag(false);
+
     }
 
     const removeTag = (tag:string) => {
-        handleChange(tags.filter((t:string) => t !== tag));
+        handleChange(tags.filter((t) => t.name !== tag));
     }
     return (
         <View style={styles.container}>
@@ -37,7 +45,7 @@ const Tags = ({tags,handleChange}:{tags:Array<string>,handleChange:any}):JSX.Ele
                     {
                         addTag &&
                         <View style={styles.updateBox}>
-                            <TextInput style={styles.input} value={newTag} onChangeText={(text) => setNewTag(text)} />
+                            <TextInput style={styles.input} value={newTag.name} onChangeText={(text) => setNewTag(text)} />
                             <Button title="Save" onPress={saveTag}/>
                         </View>
 
@@ -55,12 +63,13 @@ const Tags = ({tags,handleChange}:{tags:Array<string>,handleChange:any}):JSX.Ele
                 </View>
                 <View>
                     {
-                        tags.map((tag:string, index:number) => {
+                        tags && 
+                        tags.map((tag:any, index:number) => {
                             return (
                                 <View style={styles.tag} key={index}>
                                     <OvalIcon />
-                                    <Text style={styles.tagText}>{tag}</Text>
-                                    <CancelIcon onPress={() => removeTag(tag) } style={styles.cancel}/>
+                                    <Text style={styles.tagText}>{tag.name}</Text>
+                                    <CancelIcon onPress={() => removeTag(tag.name) } style={styles.cancel}/>
                                 </View>
                             )   
                         })

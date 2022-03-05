@@ -5,8 +5,9 @@ import DropDownPicker from 'react-native-dropdown-picker';
 import { useDispatch } from "react-redux";
 import { addTask } from "./taskSlice";
 import { View, Image, Text, Pressable } from 'native-base';
+import { sagaActions } from "../../app/sagaActions";
 
-const AddTask = ({ modalVisible, setModalVisible, taskAdded }: { modalVisible: boolean, setModalVisible: any, taskAdded: any }) => {
+const AddTask = ({ modalVisible, setModalVisible}: { modalVisible: boolean, setModalVisible: any}) => {
     const [open, setOpen] = useState(false);
     const [selectedOption, setSelectedOption] = useState('');
     const [items, setItems] = useState([
@@ -16,28 +17,16 @@ const AddTask = ({ modalVisible, setModalVisible, taskAdded }: { modalVisible: b
     ]);
     const dispatch = useDispatch()
     const [task, setTask] = useState('');
-    const generateId = () =>
-        Math.floor(Math.random() * 100000);
+
     const createTask = () => {
         if (selectedOption && task) {
+
             let newTask = {
-                id: generateId(),
-                task: task,
-                category: selectedOption,
-                description: '',
-                priority: 'medium',
-                subTasks: [],
-                tags: [],
-                time: 0,
-                due_date: '',
-                remind_me: '',
-                repeat: '',
-                status: 'pending'
+                name: task,
+                categoryName: selectedOption,
+                addToMyDay : new Date().toISOString().slice(0, 10),
             }
-            dispatch(
-                addTask(newTask)
-            );
-            taskAdded(newTask)
+            dispatch({ type: sagaActions.ADD_TASK, payload: newTask })
             setTask('');
             setSelectedOption('');
             setModalVisible(false)

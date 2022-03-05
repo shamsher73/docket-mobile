@@ -1,7 +1,7 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../app/store";
 import FilterIcon from './../../../assets/images/filter.svg';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Filter from "../../components/Filter";
 import TaskTable from '../../components/TaskTable';
 import Add from './../../../assets/images/addicon.svg';
@@ -9,14 +9,20 @@ import AddTask from './AddTask';
 import TaskModal from "../../components/TaskModal";
 import React from "react";
 import {View,HStack, ScrollView, Pressable, Text} from 'native-base';
+import { sagaActions } from "../../app/sagaActions";
 
-const MyDayTasks = ({navigation}:{navigation:any}) => {
+
+const MyDayTasks = () => {
+    const dispatch = useDispatch();
     const [task, setTask] = useState(null);
-    const [allTasks, setAllTasks] = useState(useSelector((state: RootState) => state.task));
-    const [rows, setRows] = useState(allTasks);
+    const tasks = useSelector((state: RootState) => state.task);
     const [filter, setFilter] = useState('all');
     const [modalVisible, setModalVisible] = useState(false);
     const [modalVisibleEdit, setModalVisibleEdit] = useState(false);
+
+    useEffect(() => {
+        dispatch({ type: sagaActions.FETCH_DATA_SAGA })
+    }, [dispatch])
 
     const openModal = (task:any) => {
         setTask(task);
@@ -25,34 +31,11 @@ const MyDayTasks = ({navigation}:{navigation:any}) => {
 
     const changeFilter = (filter:string) => {
         setFilter(filter);
-        if(filter === 'all') {
-            setRows(allTasks);
-        } else if(filter === 'pending') {
-            setRows(allTasks.filter(task => task.status === 'pending'));
-        } else if(filter === 'completed') {
-            setRows(allTasks.filter(task => task.status === 'completed'));
-        }
     }
 
-    const taskAdded = (task:any) => {
-        setAllTasks([...allTasks, task]);
-        setRows([...rows, task]);
-    }
-
-    const taskUpdated = (task:any) => {
-        const index = allTasks.findIndex(t => t.id === task.id);
-        setAllTasks([...allTasks.slice(0, index), task, ...allTasks.slice(index + 1)]);
-        setRows([...rows.slice(0, index), task, ...rows.slice(index + 1)]);
-    }
-
-    const taskRemoved = (task:any) => {
-        const index = allTasks.findIndex(t => t.id === task.id);
-        setAllTasks([...allTasks.slice(0, index), ...allTasks.slice(index + 1)]);
-        setRows([...rows.slice(0, index), ...rows.slice(index + 1)]);
-    }
-
-    const list = rows && rows.length > 0 ?
-        rows.map((row: any) =>
+    const filteredList = (filter === 'all') ? tasks : tasks.filter(task => task.status === filter);
+    const list = filteredList && filteredList.length > 0 ?
+    filteredList.map((row: any) =>
             <TaskTable row={row} handleModal={openModal} key={row.id} />
         ) :
         <Text>No tasks found</Text>
@@ -75,8 +58,12 @@ const MyDayTasks = ({navigation}:{navigation:any}) => {
                     <Add />
                 </View>
             </Pressable>
-            <AddTask modalVisible={modalVisible} setModalVisible={setModalVisible} taskAdded={taskAdded}/>
-            <TaskModal taskTemp={task} taskUpdated={taskUpdated} modalVisibleEdit={modalVisibleEdit} setModalVisibleEdit={setModalVisibleEdit} taskRemoved={taskRemoved}/>
+            <AddTask modalVisible={modalVisible} setModalVisible={setModalVisible}/>
+            <TaskModal 
+                task={task}
+             modalVisibleEdit={modalVisibleEdit} 
+             setModalVisibleEdit={setModalVisibleEdit} 
+             />
         </View>
     )
 }

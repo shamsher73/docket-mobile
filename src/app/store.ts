@@ -1,11 +1,19 @@
-import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
+import { configureStore, ThunkAction, Action, getDefaultMiddleware } from '@reduxjs/toolkit';
 import taskSlice from '../screens/my-day-tasks/taskSlice';
+import saga from "./saga";
+import createSagaMiddleware from "redux-saga";
+
+let sagaMiddleware = createSagaMiddleware();
+const middleware = [...getDefaultMiddleware({ thunk: false }), sagaMiddleware];
 
 export const store = configureStore({
   reducer: {
     task: taskSlice,
   },
+  middleware
 });
+
+sagaMiddleware.run(saga);
 
 export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof store.getState>;

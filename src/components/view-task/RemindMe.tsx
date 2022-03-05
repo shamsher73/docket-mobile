@@ -9,7 +9,7 @@ const RemindMe =  ({ date,handleChange }:{date:string,handleChange:any}):JSX.Ele
             <View pl="3" justifyContent="center">
                 <RemindMeIcon/>
             </View>
-            <DateChanger date={date} changeKey="remind_me" handleChange={handleChange} title="remind me" />  
+            <DateChanger date={date} changeKey="reminderDate" handleChange={handleChange} title="remind me" />  
         </View>
     );
 }
