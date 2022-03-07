@@ -21,7 +21,7 @@ const MyDayTasks = () => {
     const [modalVisibleEdit, setModalVisibleEdit] = useState(false);
 
     useEffect(() => {
-        dispatch({ type: sagaActions.FETCH_DATA_SAGA })
+        dispatch({ type: sagaActions.FETCH_TASKS })
     }, [dispatch])
 
     const openModal = (task:any) => {
