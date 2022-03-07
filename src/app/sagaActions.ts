@@ -1,5 +1,7 @@
 export const sagaActions = {
-    FETCH_DATA_SAGA: "FETCH_DATA_SAGA",
-    ADD_TASK: "ADD_TASK"
-  };
+  FETCH_TASKS: "FETCH_TASKS",
+  ADD_TASK: "ADD_TASK",
+  DELETE_TASK: "DELETE_TASK",
+  EDIT_TASK: "EDIT_TASK",
+};
   

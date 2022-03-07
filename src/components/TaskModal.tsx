@@ -13,14 +13,15 @@ import Tags from "./view-task/Tags";
 import DueDate from "./view-task/DueDate";
 import RemindMe from "./view-task/RemindMe";
 import Repeat from "./view-task/Repeat";
-import { View, Text, ScrollView } from 'native-base';
+import { View, Text, ScrollView, Pressable } from 'native-base';
+import { sagaActions } from "../app/sagaActions";
 
 
 const TaskModal = ({task,modalVisibleEdit,setModalVisibleEdit}:{task:any,modalVisibleEdit:any,setModalVisibleEdit:any}) => {
     const dispatch = useDispatch()
     const [taskCurrent, setTaskCurrent] = useState(task)
     useEffect(() => {
-        setTaskCurrent(task)
+        setTaskCurrent(task);
     }, [task])
     
     const updateTag = (tags:Array<string>) => {
@@ -28,12 +29,12 @@ const TaskModal = ({task,modalVisibleEdit,setModalVisibleEdit}:{task:any,modalVi
     }
 
     const save = () => {
-        dispatch(updateTask({...taskCurrent}))
+        dispatch({ type: sagaActions.EDIT_TASK, payload: {...taskCurrent} })
         setModalVisibleEdit(false)
     }
 
     const deleteTask = () => {
-        dispatch(removeTask({id : taskCurrent.id}))
+        dispatch({ type: sagaActions.DELETE_TASK, payload: {id: taskCurrent.id} })
         setModalVisibleEdit(false)
     }
 
@@ -56,7 +57,9 @@ const TaskModal = ({task,modalVisibleEdit,setModalVisibleEdit}:{task:any,modalVi
                 <View flex="1" bottom="0"  mt="10" borderTopLeftRadius="20">
                     <View p="4" justifyContent="space-between" flexDirection="row" borderTopLeftRadius="20" borderTopRightRadius="20" bg="white">
                         <Text fontFamily="Roboto" fontStyle="normal" fontWeight="bold" fontSize="18" lineHeight="21" letterSpacing="0.5" textTransform="uppercase">TASK DETAILS</Text>
-                        <CloseIcon onPress={() =>setModalVisibleEdit(false) }/>
+                        <Pressable onPress={() => setModalVisibleEdit(!modalVisibleEdit)}>
+                            <CloseIcon />
+                        </Pressable>
                     </View>
                     <ScrollView height="4/5" bg="white">
                         <TaskTitle title={taskCurrent.name} handleChange={() => {}}/>
@@ -69,7 +72,9 @@ const TaskModal = ({task,modalVisibleEdit,setModalVisibleEdit}:{task:any,modalVi
                         <Repeat repeat={taskCurrent.repeat} handleChange={() => {}}/> 
                     </ScrollView>
                     <View bg="white" flex="1" flexDirection="row" justifyContent="space-between" alignItems="center" pr="5" pl="5" shadow="6">
-                        <DeleteIcon onPress={() => deleteTask()}/>
+                        <Pressable onPress={() => deleteTask()}>
+                            <DeleteIcon />
+                        </Pressable>
                         <Text onPress={() => save()} p="2" pl="4" pr="4" bg="#6a8ce6" color="white" fontFamily="Roboto" fontStyle="normal" fontWeight="bold" fontSize="14" lineHeight="16" letterSpacing="0.1" rounded="xl">Save</Text>
                     </View>
                 </View>)
