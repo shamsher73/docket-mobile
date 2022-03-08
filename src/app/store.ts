@@ -1,6 +1,6 @@
 import { configureStore, ThunkAction, Action, getDefaultMiddleware } from '@reduxjs/toolkit';
 import taskSlice from '../screens/my-day-tasks/taskSlice';
-import saga from "./saga";
+import saga from "../screens/my-day-tasks/saga";
 import createSagaMiddleware from "redux-saga";
 
 let sagaMiddleware = createSagaMiddleware();

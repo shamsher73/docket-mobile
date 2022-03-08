@@ -9,19 +9,20 @@ import AddTask from './AddTask';
 import TaskModal from "../../components/TaskModal";
 import React from "react";
 import {View,HStack, ScrollView, Pressable, Text} from 'native-base';
-import { sagaActions } from "../../app/sagaActions";
+import { tasksRequested } from "./taskSlice";
 
 
 const MyDayTasks = () => {
     const dispatch = useDispatch();
     const [task, setTask] = useState(null);
-    const tasks = useSelector((state: RootState) => state.task);
+    const tasks = useSelector((state: RootState) => state.task.tasks);
+    const isLoading = useSelector((state: RootState) => state.task.isLoading);
     const [filter, setFilter] = useState('all');
     const [modalVisible, setModalVisible] = useState(false);
     const [modalVisibleEdit, setModalVisibleEdit] = useState(false);
 
     useEffect(() => {
-        dispatch({ type: sagaActions.FETCH_TASKS })
+        dispatch(tasksRequested({}));
     }, [dispatch])
 
     const openModal = (task:any) => {
@@ -51,7 +52,8 @@ const MyDayTasks = () => {
                 </View>
             </HStack>
             <ScrollView>
-                {list}
+                {isLoading ? <Text>Loading...</Text> : list}
+                {/* {list} */}
             </ScrollView>
             <Pressable onPress={() => setModalVisible(true)}>
                 <View position="absolute" right="5" bottom="5" width="20" height="20" bg="#6b8ae6" borderRadius="40" justifyContent="center" alignItems="center">
