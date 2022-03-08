@@ -3,9 +3,8 @@ import { Modal, TextInput, TouchableHighlight, TouchableOpacity, TouchableWithou
 import CloseModal from './../../../assets/images/close_modal.svg';
 import DropDownPicker from 'react-native-dropdown-picker';
 import { useDispatch } from "react-redux";
-import { addTask } from "./taskSlice";
+import { taskAddRequested } from "./taskSlice";
 import { View, Image, Text, Pressable } from 'native-base';
-import { sagaActions } from "../../app/sagaActions";
 
 const AddTask = ({ modalVisible, setModalVisible}: { modalVisible: boolean, setModalVisible: any}) => {
     const [open, setOpen] = useState(false);
@@ -26,7 +25,7 @@ const AddTask = ({ modalVisible, setModalVisible}: { modalVisible: boolean, setM
                 categoryName: selectedOption,
                 addToMyDay : new Date().toISOString().slice(0, 10),
             }
-            dispatch({ type: sagaActions.ADD_TASK, payload: newTask })
+            dispatch(taskAddRequested(newTask));
             setTask('');
             setSelectedOption('');
             setModalVisible(false)

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Modal } from "react-native";
 import { useDispatch } from "react-redux";
-import { removeTask, updateTask } from "../screens/my-day-tasks/taskSlice";
+import { removeTask, taskRemoveRequested, taskUpdateRequested, updateTask } from "../screens/my-day-tasks/taskSlice";
 import CloseIcon from './../../assets/images/close.svg';
 import TaskTitle from "./view-task/TaskTitle";
 import Description from "./view-task/Description";
@@ -14,7 +14,6 @@ import DueDate from "./view-task/DueDate";
 import RemindMe from "./view-task/RemindMe";
 import Repeat from "./view-task/Repeat";
 import { View, Text, ScrollView, Pressable } from 'native-base';
-import { sagaActions } from "../app/sagaActions";
 
 
 const TaskModal = ({task,modalVisibleEdit,setModalVisibleEdit}:{task:any,modalVisibleEdit:any,setModalVisibleEdit:any}) => {
@@ -29,12 +28,12 @@ const TaskModal = ({task,modalVisibleEdit,setModalVisibleEdit}:{task:any,modalVi
     }
 
     const save = () => {
-        dispatch({ type: sagaActions.EDIT_TASK, payload: {...taskCurrent} })
+        dispatch(taskUpdateRequested({...taskCurrent}))
         setModalVisibleEdit(false)
     }
 
     const deleteTask = () => {
-        dispatch({ type: sagaActions.DELETE_TASK, payload: {id: taskCurrent.id} })
+        dispatch(taskRemoveRequested({id: taskCurrent.id}))
         setModalVisibleEdit(false)
     }
 
