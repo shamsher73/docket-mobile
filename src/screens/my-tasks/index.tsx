@@ -10,6 +10,7 @@ import TaskModal from "../../components/TaskModal";
 import React from "react";
 import {View,HStack, ScrollView, Pressable, Text, Spinner} from 'native-base';
 import { tasksRequested } from "./../my-day-tasks/taskSlice";
+import FilterModal from "../../components/FilterModal";
 
 
 const MyTasks = () => {
@@ -21,6 +22,11 @@ const MyTasks = () => {
     const [filter, setFilter] = useState('all');
     const [modalVisible, setModalVisible] = useState(false);
     const [modalVisibleEdit, setModalVisibleEdit] = useState(false);
+    const [filterModalVisible, setFilterModalVisible] = useState(false);
+    const [customFilter, setCustomFilter] = useState({
+        category: '',
+        due_date: '',
+    });
 
     useEffect(() => {
         dispatch(tasksRequested({}));
@@ -35,7 +41,23 @@ const MyTasks = () => {
         setFilter(filter);
     }
 
-    const filteredList = (filter === 'all') ? tasks : tasks.filter(task => task.status === filter);
+    const changeCustomFilter = (key,value) => {
+        setCustomFilter({
+            ...customFilter,
+            [key]: value
+        })
+    }
+
+    const filteredListTemp = (filter === 'all') ? tasks : tasks.filter(task => task.status === filter);
+
+    const filteredList = filteredListTemp.filter(task => {
+        if(customFilter.due_date !== '' && task.dueDate.substring(0, 10) === customFilter.due_date.toISOString().split('T')[0]) {
+            return task;
+        }
+        if(customFilter.due_date === ''){
+            return task;
+        }
+    });
     const list = filteredList && filteredList.length > 0 ?
     filteredList.map((row: any) =>
             <TaskTable row={row} handleModal={openModal} key={row.id} />
@@ -49,7 +71,9 @@ const MyTasks = () => {
                     <Filter filter={filter} filterValues={['all','pending','completed']} filterHandler={changeFilter} />
                 </View>
                 <View justifyContent="center" bg="white" rounded="xl" p="3" ml="1">
-                    <FilterIcon />
+                    <Pressable onPress={() => setFilterModalVisible(true)}>
+                        <FilterIcon />
+                    </Pressable>
                 </View>
             </HStack>
             {error && <Text>{error}</Text>}
@@ -71,6 +95,9 @@ const MyTasks = () => {
              modalVisibleEdit={modalVisibleEdit} 
              setModalVisibleEdit={setModalVisibleEdit} 
              />
+            <FilterModal modalVisible={filterModalVisible} 
+                setModalVisible={setFilterModalVisible}  
+                changeCustomFilter={changeCustomFilter}/>
         </View>
     )
 }
