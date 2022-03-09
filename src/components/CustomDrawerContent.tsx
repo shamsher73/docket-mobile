@@ -11,7 +11,7 @@ const CustomDrawerContent = (props) => {
           <DrawerItem label="Shivam Chaudhary" onPress={() => alert('Not accessible')} style={styles.header} labelStyle={styles.headerText}/>
           <DrawerItem label="Dashboard" onPress={() => {setCurrentRoute("Dashboard");navigation.navigate('Dashboard')}} labelStyle={currentRoute == "Dashboard" ? styles.drawerContentSelected : styles.drawerContent} />
           <DrawerItem label="My Day Tasks" onPress={() => {setCurrentRoute("My Day Tasks");navigation.navigate('My Day Tasks')}} labelStyle={currentRoute == "My Day Tasks" ? styles.drawerContentSelected : styles.drawerContent} />
-          <DrawerItem label="Tasks" onPress={() => alert('Not accessible')} labelStyle={currentRoute == "Tasks" ? styles.drawerContentSelected : styles.drawerContent} />
+          <DrawerItem label="My Tasks" onPress={() => {setCurrentRoute("My Tasks");navigation.navigate('My Tasks')}} labelStyle={currentRoute == "My Tasks" ? styles.drawerContentSelected : styles.drawerContent} />
         </DrawerContentScrollView>
       );
 }
