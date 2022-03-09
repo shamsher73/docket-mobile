@@ -8,7 +8,7 @@ import Add from './../../../assets/images/addicon.svg';
 import AddTask from './../my-day-tasks/AddTask';
 import TaskModal from "../../components/TaskModal";
 import React from "react";
-import {View,HStack, ScrollView, Pressable, Text} from 'native-base';
+import {View,HStack, ScrollView, Pressable, Text, Spinner} from 'native-base';
 import { tasksRequested } from "./../my-day-tasks/taskSlice";
 
 
@@ -17,6 +17,7 @@ const MyTasks = () => {
     const [task, setTask] = useState(null);
     const tasks = useSelector((state: RootState) => state.task.tasks);
     const isLoading = useSelector((state: RootState) => state.task.isLoading);
+    const error = useSelector((state: RootState) => state.task.error);
     const [filter, setFilter] = useState('all');
     const [modalVisible, setModalVisible] = useState(false);
     const [modalVisibleEdit, setModalVisibleEdit] = useState(false);
@@ -51,8 +52,13 @@ const MyTasks = () => {
                     <FilterIcon />
                 </View>
             </HStack>
+            {error && <Text>{error}</Text>}
             <ScrollView>
-                {isLoading ? <Text>Loading...</Text> : list}
+                {isLoading ?       
+                <HStack space={2} alignContent="center" justifyContent="center" top="1/2">
+                    <Spinner accessibilityLabel="Loading posts"  size="lg" color="black.800" />
+                </HStack>
+                : list}
             </ScrollView>
             <Pressable onPress={() => setModalVisible(true)}>
                 <View position="absolute" right="5" bottom="5" width="20" height="20" bg="#6b8ae6" borderRadius="40" justifyContent="center" alignItems="center">
