@@ -5,14 +5,14 @@ import { useEffect, useState } from "react";
 import Filter from "../../components/Filter";
 import TaskTable from '../../components/TaskTable';
 import Add from './../../../assets/images/addicon.svg';
-import AddTask from './AddTask';
+import AddTask from './../my-day-tasks/AddTask';
 import TaskModal from "../../components/TaskModal";
 import React from "react";
 import {View,HStack, ScrollView, Pressable, Text} from 'native-base';
-import { tasksRequested } from "./taskSlice";
+import { tasksRequested } from "./../my-day-tasks/taskSlice";
 
 
-const MyDayTasks = () => {
+const MyTasks = () => {
     const dispatch = useDispatch();
     const [task, setTask] = useState(null);
     const tasks = useSelector((state: RootState) => state.task.tasks);
@@ -34,10 +34,7 @@ const MyDayTasks = () => {
         setFilter(filter);
     }
 
-    const filteredList = (filter === 'all') ? 
-    tasks.filter(task => (task.dueDate.substring(0, 10) === new Date().toISOString().split('T')[0]))
-    : 
-    tasks.filter(task => task.dueDate.substring(0, 10) === new Date().toISOString().split('T')[0] && task.status === filter);
+    const filteredList = (filter === 'all') ? tasks : tasks.filter(task => task.status === filter);
     const list = filteredList && filteredList.length > 0 ?
     filteredList.map((row: any) =>
             <TaskTable row={row} handleModal={openModal} key={row.id} />
@@ -56,7 +53,6 @@ const MyDayTasks = () => {
             </HStack>
             <ScrollView>
                 {isLoading ? <Text>Loading...</Text> : list}
-                {/* {list} */}
             </ScrollView>
             <Pressable onPress={() => setModalVisible(true)}>
                 <View position="absolute" right="5" bottom="5" width="20" height="20" bg="#6b8ae6" borderRadius="40" justifyContent="center" alignItems="center">
@@ -73,4 +69,4 @@ const MyDayTasks = () => {
     )
 }
 
-export default MyDayTasks;
+export default MyTasks;
