@@ -7,7 +7,7 @@ import React, { useEffect } from "react";
 import { ScrollView, Text} from 'native-base';
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../app/store";
-import { analyticsRequested } from "./analyticsSlice";
+import { analyticsCategoryRequested, analyticsRequested } from "./analyticsSlice";
 
 const Dashboard = ():JSX.Element => {
 
@@ -19,12 +19,17 @@ const Dashboard = ():JSX.Element => {
     const [filter, setFilter] = React.useState("year");
     const taskSuccessData = useSelector((state: RootState) => state.analytics.data);
     const isLoading = useSelector((state: RootState) => state.analytics.isSuccessLoading);
+
+    const taskCategoryData = useSelector((state: RootState) => state.analytics.categoryData);
+    const taskCategoryLoading = useSelector((state: RootState) => state.analytics.isCategoryLoading);
+
     const todayDate = new Date();
     const [dateRange, setDateRange] = React.useState({
         "startDate": "",
         "endDate": ""
     });
     useEffect(() => {
+        dispatch(analyticsCategoryRequested(dateRange));
         dispatch(analyticsRequested(dateRange));
         filterHandler(filter);
     }, [dispatch])
@@ -52,6 +57,7 @@ const Dashboard = ():JSX.Element => {
             "startDate": startDate.toISOString().split("T")[0],
             "endDate": endDate.toISOString().split("T")[0]
         });
+        dispatch(analyticsCategoryRequested({"startDate":startDate.toISOString().split("T")[0],"endDate":endDate.toISOString().split("T")[0]}))
         dispatch(analyticsRequested({"startDate":startDate.toISOString().split("T")[0],"endDate":endDate.toISOString().split("T")[0]}));
     }
 
@@ -59,7 +65,10 @@ const Dashboard = ():JSX.Element => {
         <ScrollView p="3">
             <Text fontStyle="normal" fontWeight="600" fontSize="20" lineHeight="30" fontFamily="Poppins">Overview</Text>
             <Filter filter={filter} filterValues={filterValues} filterHandler={(value) => filterHandler(value)} />
-            <TotalHoursChart categories={[{ 'name': 'Category 1', 'value': 4 }, { 'name': 'Category 2', 'value': 3 }, { 'name': 'Category 3', 'value': 2 }, { 'name': 'More', 'value': 1 }]} />
+            <TotalHoursChart 
+                categories={taskCategoryData}
+                taskCategoryLoading={taskCategoryLoading}
+            />
             <WorkingHoursChart labels={labels} dataset={dataset} legends={legends}/>
             <OverallPendingTask 
                 max={('totalTasks' in taskSuccessData) ? taskSuccessData['totalTasks'] : 1} 
