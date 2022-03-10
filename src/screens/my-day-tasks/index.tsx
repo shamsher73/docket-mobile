@@ -10,6 +10,7 @@ import TaskModal from "../../components/TaskModal";
 import React from "react";
 import {View,HStack, ScrollView, Pressable, Text, Spinner} from 'native-base';
 import { tasksRequested } from "./taskSlice";
+import Error from "../../components/Error";
 
 
 const MyDayTasks = () => {
@@ -56,7 +57,7 @@ const MyDayTasks = () => {
                     <FilterIcon />
                 </View>
             </HStack>
-            {error && <Text>{error}</Text>}
+            {error && <Error error={error} />}
             <ScrollView>
                 {isLoading ?       
                 <HStack space={2} alignContent="center" justifyContent="center" top="1/2">

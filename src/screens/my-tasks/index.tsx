@@ -11,6 +11,7 @@ import React from "react";
 import {View,HStack, ScrollView, Pressable, Text, Spinner} from 'native-base';
 import { tasksRequested } from "./../my-day-tasks/taskSlice";
 import FilterModal from "../../components/FilterModal";
+import Error from "../../components/Error";
 
 
 const MyTasks = () => {
@@ -76,7 +77,7 @@ const MyTasks = () => {
                     </Pressable>
                 </View>
             </HStack>
-            {error && <Text>{error}</Text>}
+            {error && <Error error={error} />}
             <ScrollView>
                 {isLoading ?       
                 <HStack space={2} alignContent="center" justifyContent="center" top="1/2">

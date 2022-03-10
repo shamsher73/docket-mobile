@@ -8,6 +8,7 @@ import { ScrollView, Text} from 'native-base';
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../app/store";
 import { analyticsCategoryRequested, analyticsRequested } from "./analyticsSlice";
+import Error from "../../components/Error";
 
 const Dashboard = ():JSX.Element => {
 
@@ -19,7 +20,7 @@ const Dashboard = ():JSX.Element => {
     const [filter, setFilter] = React.useState("year");
     const taskSuccessData = useSelector((state: RootState) => state.analytics.data);
     const isLoading = useSelector((state: RootState) => state.analytics.isSuccessLoading);
-
+    const error = useSelector((state: RootState) => state.analytics.error);
     const taskCategoryData = useSelector((state: RootState) => state.analytics.categoryData);
     const taskCategoryLoading = useSelector((state: RootState) => state.analytics.isCategoryLoading);
 
@@ -63,6 +64,7 @@ const Dashboard = ():JSX.Element => {
 
     return (
         <ScrollView p="3">
+            {error && !isLoading && <Error error={error} />}
             <Text fontStyle="normal" fontWeight="600" fontSize="20" lineHeight="30" fontFamily="Poppins">Overview</Text>
             <Filter filter={filter} filterValues={filterValues} filterHandler={(value) => filterHandler(value)} />
             <TotalHoursChart 
