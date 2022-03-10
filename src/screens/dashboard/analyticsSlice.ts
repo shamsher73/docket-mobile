@@ -5,7 +5,10 @@ const analyticsReducer = createSlice({
     initialState: {
         data : {},
         isSuccessLoading: false,
-        error: null
+        error: null,
+        isCategoryLoading: false,
+
+        categoryData: [],
     },
     reducers : {
         analyticsRequested(state,action) {
@@ -19,13 +22,30 @@ const analyticsReducer = createSlice({
             state.isSuccessLoading = false;
             state.error = action.payload.error;
         },
+
+        analyticsCategoryRequested(state,action) {
+            return {categoryData: [],isCategoryLoading: true};
+        },
+        analyticsCategorySuccess : (state, action: any) => {
+            state.isCategoryLoading = false;
+            state.categoryData = action.payload;
+        },
+        analyticsCategoryFailed : (state, action) => {
+            state.isCategoryLoading = false;
+            state.error = action.payload.error;
+        }
+
     },
 }
 )
 export const { 
     analyticsRequested,
     analyticsSuccess,
-    analyticsFailed
+    analyticsFailed,
+
+    analyticsCategoryRequested,
+    analyticsCategorySuccess,
+    analyticsCategoryFailed
  } = analyticsReducer.actions
 
 export default analyticsReducer.reducer
