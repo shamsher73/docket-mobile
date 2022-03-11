@@ -4,6 +4,9 @@ import saga from "../screens/my-day-tasks/saga";
 import {default as analyticsSaga} from "../screens/dashboard/saga";
 import createSagaMiddleware from "redux-saga";
 import analyticsSlice from '../screens/dashboard/analyticsSlice';
+import categorySlice from '../screens/my-day-tasks/categorySlice';
+import {default as categorySaga} from "../screens/my-day-tasks/categorySaga";
+
 
 let sagaMiddleware = createSagaMiddleware();
 const middleware = [...getDefaultMiddleware({ thunk: false }), sagaMiddleware];
@@ -12,12 +15,14 @@ export const store = configureStore({
   reducer: {
     task: taskSlice,
     analytics: analyticsSlice,
+    category: categorySlice,
   },
   middleware
 });
 
 sagaMiddleware.run(saga);
 sagaMiddleware.run(analyticsSaga);
+sagaMiddleware.run(categorySaga);
 
 export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof store.getState>;
