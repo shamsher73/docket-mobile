@@ -31,10 +31,8 @@ const Dashboard = ():JSX.Element => {
         "endDate": ""
     });
     useEffect(() => {
-        dispatch(analyticsCategoryRequested(dateRange));
-        dispatch(analyticsRequested(dateRange));
         filterHandler(filter);
-    }, [dispatch])
+    }, [])
 
     const filterHandler = (filter: string) => {
         let startDate = new Date();
