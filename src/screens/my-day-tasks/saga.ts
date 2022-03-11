@@ -1,6 +1,7 @@
 import { call, takeEvery, put } from "redux-saga/effects";
-import { taskAddFailed, taskAddRequested, taskAddSuccess, taskRemoveFailed, taskRemoveRequested, taskRemoveSuccess, tasksFailed, tasksRequested, tasksSuccess, taskUpdateFailed, taskUpdateRequested, taskUpdateSuccess } from "./taskSlice";
+import { taskAddFailed, taskAddRequested, taskAddSuccess, taskMarkCompleteFailed, taskMarkCompleteRequested, taskMarkCompleteSuccess, taskRemoveFailed, taskRemoveRequested, taskRemoveSuccess, tasksFailed, tasksRequested, tasksSuccess, taskUpdateFailed, taskUpdateRequested, taskUpdateSuccess } from "./taskSlice";
 import { callAPI } from "../../app/api";
+import { Action } from "@reduxjs/toolkit";
 
 export function* fetchTasks() {
   try {
@@ -13,7 +14,7 @@ export function* fetchTasks() {
   }
 }
 
-export function* addTaskSaga(action: any) {
+export function* addTaskSaga(action: Action) {
     try {
         let result = yield call(() => 
             callAPI({ url: "/secure/createTask", method: "post", data: action.payload })
@@ -24,7 +25,7 @@ export function* addTaskSaga(action: any) {
     }
 }
 
-export function* deleteTask(action: any) {
+export function* deleteTask(action: Action) {
     try {
         let result = yield call(() => 
             callAPI({ url: `/secure/deleteTask/${action.payload.id}`, method: "delete" })
@@ -35,9 +36,10 @@ export function* deleteTask(action: any) {
     }
 }
 
-export function* editTask(action: any) {
+export function* editTask(action: Action) {
     const { id, ...payload } = action.payload;
     delete payload.totalTime;
+    delete payload.isLoading;
     try {
         let result = yield call(() =>
             callAPI({ url: `/secure/updateTask/${id}`, method: "put", data: payload })
@@ -50,9 +52,21 @@ export function* editTask(action: any) {
     }
 }
 
+export function* markCompleted(action:Action) {
+    try {
+        let result = yield call(() =>
+            callAPI({ url: `/secure/updateTaskStatus/${action.payload.id}`, method: "patch", data: {"status": action.payload.status} })
+        );
+        yield put(taskMarkCompleteSuccess(action.payload));
+    } catch (e) {
+        yield put(taskMarkCompleteFailed({ error: e.message }));
+    }
+}
+
 export default function* rootSaga() {
     yield takeEvery(tasksRequested, fetchTasks);
     yield takeEvery(taskAddRequested, addTaskSaga);
     yield takeEvery(taskRemoveRequested, deleteTask);
     yield takeEvery(taskUpdateRequested, editTask);
+    yield takeEvery(taskMarkCompleteRequested, markCompleted)
 }

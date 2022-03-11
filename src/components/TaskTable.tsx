@@ -3,7 +3,7 @@ import {TouchableHighlight } from "react-native";
 import Unchecked from './../../assets/images/unchecked.svg';
 import Checked from './../../assets/images/checked.svg';
 import React from "react";
-import {View, Text} from 'native-base';
+import {View, Text, Spinner} from 'native-base';
 
 interface SubTask {
     title: string
@@ -27,10 +27,10 @@ interface TaskState {
     status: string
 }
 
-const TaskTable = ({row,handleModal}:{row:TaskState,handleModal:any}) => {
-    const [selected, setSelected] = useState(false);
+const TaskTable = ({row,handleModal,toggleStatus}:{row:TaskState,handleModal:any,toggleStatus:any}) => {
+
     return (
-        <View flex="1" flexDirection="row" bg={selected ? "#F6FFFB" : "#EDF1F9"} justifyContent="space-between" p="3" mt="2" shadow="0.05">
+        <View flex="1" flexDirection="row" bg={row.status == "completed" ? "#F6FFFB" : "#EDF1F9"} justifyContent="space-between" p="3" mt="2" shadow="0.05">
             <TouchableHighlight onPress={() => handleModal(row)}>
                 <View>
                     <Text fontFamily="Roboto" fontStyle="normal" fontSize="16" fontWeight="bold" letterSpacing="0.5">{row.name}</Text>
@@ -38,11 +38,14 @@ const TaskTable = ({row,handleModal}:{row:TaskState,handleModal:any}) => {
                 </View>
             </TouchableHighlight>
             <View flex="1" justifyContent="center" alignItems="flex-end" >
-                <TouchableHighlight onPress={() => setSelected(!selected)} underlayColor="white">
-                    {
-                        selected ? <Checked /> : <Unchecked />
-                    }
-                </TouchableHighlight>
+                {row.isLoading == true && <Spinner accessibilityLabel="Loading"  size="lg" color="black.800" />}
+                {row.isLoading != true &&
+                    <TouchableHighlight onPress={() => toggleStatus(row)} underlayColor="white">
+                        {
+                            row.status == "completed" ? <Checked /> : <Unchecked />
+                        }
+                    </TouchableHighlight>
+                }
             </View>
         </View>
     )

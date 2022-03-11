@@ -9,7 +9,7 @@ import AddTask from './AddTask';
 import TaskModal from "../../components/TaskModal";
 import React from "react";
 import {View,HStack, ScrollView, Pressable, Text, Spinner} from 'native-base';
-import { tasksRequested } from "./taskSlice";
+import { taskMarkCompleteRequested, tasksRequested } from "./taskSlice";
 import Error from "../../components/Error";
 import { RefreshControl } from "react-native";
 
@@ -41,9 +41,14 @@ const MyDayTasks = () => {
     tasks.filter(task => (task.dueDate.substring(0, 10) === new Date().toISOString().split('T')[0]))
     : 
     tasks.filter(task => task.dueDate.substring(0, 10) === new Date().toISOString().split('T')[0] && task.status === filter);
+    
+    const toggleStatus = (task) => {
+        dispatch(taskMarkCompleteRequested({id: task.id,status: task.status === 'completed' ? 'pending' : 'completed'}));
+    }
+
     const list = filteredList && filteredList.length > 0 ?
     filteredList.map((row: any) =>
-            <TaskTable row={row} handleModal={openModal} key={row.id} />
+            <TaskTable row={row} handleModal={openModal} key={row.id} toggleStatus={toggleStatus} />
         ) :
         <Text>No tasks found</Text>
 
