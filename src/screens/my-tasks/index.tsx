@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../app/store";
 import FilterIcon from './../../../assets/images/filter.svg';
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Filter from "../../components/Filter";
 import TaskTable from '../../components/TaskTable';
 import Add from './../../../assets/images/addicon.svg';
@@ -11,7 +11,8 @@ import React from "react";
 import {View,HStack, ScrollView, Pressable, Text, Spinner} from 'native-base';
 import { tasksRequested } from "./../my-day-tasks/taskSlice";
 import FilterModal from "../../components/FilterModal";
-
+import Error from "../../components/Error";
+import { RefreshControl } from "react-native";
 
 const MyTasks = () => {
     const dispatch = useDispatch();
@@ -64,6 +65,14 @@ const MyTasks = () => {
         ) :
         <Text>No tasks found</Text>
 
+
+    const [refreshing, setRefreshing] = useState(false);
+    const onRefresh = useCallback(() => {
+        setRefreshing(true);
+        dispatch(tasksRequested({}));
+        setRefreshing(false);
+    }, []);
+
     return (
         <View p="3" flex="1">
             <HStack>
@@ -76,8 +85,16 @@ const MyTasks = () => {
                     </Pressable>
                 </View>
             </HStack>
-            {error && <Text>{error}</Text>}
-            <ScrollView>
+            {error && <Error error={error} />}
+            <ScrollView
+               refreshControl={
+                <RefreshControl
+                  refreshing={refreshing}
+                  onRefresh={onRefresh}
+                />
+              }
+
+            >
                 {isLoading ?       
                 <HStack space={2} alignContent="center" justifyContent="center" top="1/2">
                     <Spinner accessibilityLabel="Loading posts"  size="lg" color="black.800" />

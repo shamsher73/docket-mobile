@@ -3,11 +3,13 @@ import SuccessRate from "../../components/cards/SuccessRate";
 import TotalHoursChart from "../../components/cards/TotalHoursChart";
 import WorkingHoursChart from "../../components/cards/WorkingHoursChart";
 import Filter from "../../components/Filter";
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { ScrollView, Text} from 'native-base';
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../app/store";
 import { analyticsCategoryRequested, analyticsRequested } from "./analyticsSlice";
+import Error from "../../components/Error";
+import { RefreshControl } from "react-native";
 
 const Dashboard = ():JSX.Element => {
 
@@ -19,7 +21,7 @@ const Dashboard = ():JSX.Element => {
     const [filter, setFilter] = React.useState("year");
     const taskSuccessData = useSelector((state: RootState) => state.analytics.data);
     const isLoading = useSelector((state: RootState) => state.analytics.isSuccessLoading);
-
+    const error = useSelector((state: RootState) => state.analytics.error);
     const taskCategoryData = useSelector((state: RootState) => state.analytics.categoryData);
     const taskCategoryLoading = useSelector((state: RootState) => state.analytics.isCategoryLoading);
 
@@ -29,10 +31,8 @@ const Dashboard = ():JSX.Element => {
         "endDate": ""
     });
     useEffect(() => {
-        dispatch(analyticsCategoryRequested(dateRange));
-        dispatch(analyticsRequested(dateRange));
         filterHandler(filter);
-    }, [dispatch])
+    }, [])
 
     const filterHandler = (filter: string) => {
         let startDate = new Date();
@@ -61,8 +61,22 @@ const Dashboard = ():JSX.Element => {
         dispatch(analyticsRequested({"startDate":startDate.toISOString().split("T")[0],"endDate":endDate.toISOString().split("T")[0]}));
     }
 
+    const [refreshing, setRefreshing] = useState(false);
+    const onRefresh = useCallback(() => {
+        setRefreshing(true);
+        filterHandler(filter);
+        setRefreshing(false);
+    }, []);
     return (
-        <ScrollView p="3">
+        <ScrollView p="3"
+        refreshControl={
+            <RefreshControl
+              refreshing={refreshing}
+              onRefresh={onRefresh}
+            />
+          }
+        >
+            {error && !isLoading && <Error error={error} />}
             <Text fontStyle="normal" fontWeight="600" fontSize="20" lineHeight="30" fontFamily="Poppins">Overview</Text>
             <Filter filter={filter} filterValues={filterValues} filterHandler={(value) => filterHandler(value)} />
             <TotalHoursChart 

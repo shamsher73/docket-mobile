@@ -1,6 +1,7 @@
 import { DrawerContentScrollView, DrawerItem, DrawerItemList } from "@react-navigation/drawer";
 import { StyleSheet } from "react-native";
 import React, { useState } from "react";
+import UserIcon from "./UserIcon";
 
 const CustomDrawerContent = (props) => {
     const [currentRoute, setCurrentRoute] = useState('Dashboard');
@@ -8,10 +9,17 @@ const CustomDrawerContent = (props) => {
     return (
         <DrawerContentScrollView {...props} >
           <DrawerItemList {...props}   />
-          <DrawerItem label="Shivam Chaudhary" onPress={() => alert('Not accessible')} style={styles.header} labelStyle={styles.headerText}/>
+         
+        <DrawerItem label="Shivam Chaudhary" onPress={() => alert('Not accessible')} style={styles.header} labelStyle={styles.headerText}
+            icon={() => <UserIcon /> }
+        />
           <DrawerItem label="Dashboard" onPress={() => {setCurrentRoute("Dashboard");navigation.navigate('Dashboard')}} labelStyle={currentRoute == "Dashboard" ? styles.drawerContentSelected : styles.drawerContent} />
           <DrawerItem label="My Day Tasks" onPress={() => {setCurrentRoute("My Day Tasks");navigation.navigate('My Day Tasks')}} labelStyle={currentRoute == "My Day Tasks" ? styles.drawerContentSelected : styles.drawerContent} />
-          <DrawerItem label="My Tasks" onPress={() => {setCurrentRoute("My Tasks");navigation.navigate('My Tasks')}} labelStyle={currentRoute == "My Tasks" ? styles.drawerContentSelected : styles.drawerContent} />
+          <DrawerItem label="Tasks" onPress={() => {setCurrentRoute("My Tasks");navigation.navigate('My Tasks')}} labelStyle={currentRoute == "My Tasks" ? styles.drawerContentSelected : styles.drawerContent} />
+          <DrawerItem label="History" onPress={() => {}} labelStyle={currentRoute == "History" ? styles.drawerContentSelected : styles.drawerContent} />
+          <DrawerItem label="Lists" onPress={() => {}} labelStyle={currentRoute == "Lists" ? styles.drawerContentSelected : styles.drawerContent} />
+          <DrawerItem label="Category and Tags" onPress={() => {}} labelStyle={currentRoute == "Category and Tags" ? styles.drawerContentSelected : styles.drawerContent} />
+
         </DrawerContentScrollView>
       );
 }
@@ -23,7 +31,7 @@ const styles = StyleSheet.create({
         borderBottomRightRadius: 20,
         borderBottomLeftRadius: 10,
         justifyContent: 'flex-end',
-        marginTop: -90,
+        marginTop: -100,
         marginRight:0,
         marginLeft: 0,
     },
@@ -55,6 +63,7 @@ const styles = StyleSheet.create({
         color: '#FFFFFF',
         backgroundColor: '#5a6cd5',
         paddingLeft: 20,
+        marginRight: "30%",
         paddingTop:8,
         paddingBottom:8,
         borderRadius: 10
