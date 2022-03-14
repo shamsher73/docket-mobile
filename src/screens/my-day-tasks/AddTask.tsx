@@ -57,7 +57,6 @@ const AddTask = ({ modalVisible, setModalVisible }: { modalVisible: boolean, set
                                     <ScrollView horizontal={false}>
                                     <SearchableDropdown
                                     onItemSelect={(item) => {
-                                        console.log(item)
                                         setSelectedItem(item.name)
                                     }}
                                     itemsContainerStyle={{
@@ -100,7 +99,7 @@ const AddTask = ({ modalVisible, setModalVisible }: { modalVisible: boolean, set
                                                 lineHeight: 16,
                                                 letterSpacing: 0.1
                                             },
-                                            onTextChange: text => console.log(text)
+                                            onTextChange: text => setSelectedItem(text)
                                         }
                                     }
                                     listProps={
@@ -116,7 +115,7 @@ const AddTask = ({ modalVisible, setModalVisible }: { modalVisible: boolean, set
                 </Modal.Body>
                     <Pressable onPress={() => { createTask() }}>
                         <View bottom="0" p="3" bg="#6895E6" borderRadius="8" mb="6" mr="4" ml="4" alignItems="center">
-                            <Text fontFamily="Roboto" fontStyle="normal" fontWeight="bold" fontSize="16" lineHeight="19" color="white" textTransform="uppercase">Add Task</Text>
+                            <Text fontFamily="Roboto" fontStyle="normal" fontWeight="bold" fontSize="16" lineHeight="19" color="white" textTransform="uppercase" onPress={() => { createTask() }}>Add Task</Text>
                         </View>
                     </Pressable>
             </Modal.Content>

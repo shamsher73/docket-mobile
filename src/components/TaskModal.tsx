@@ -14,6 +14,7 @@ import DueDate from "./view-task/DueDate";
 import RemindMe from "./view-task/RemindMe";
 import Repeat from "./view-task/Repeat";
 import { View, Text, ScrollView, Pressable } from 'native-base';
+import SubTask from "./view-task/SubTask";
 
 
 const TaskModal = ({task,modalVisibleEdit,setModalVisibleEdit}:{task:any,modalVisibleEdit:any,setModalVisibleEdit:any}) => {
@@ -42,6 +43,10 @@ const TaskModal = ({task,modalVisibleEdit,setModalVisibleEdit}:{task:any,modalVi
         setTaskCurrent({...taskCurrent, [key]: value})
     }
 
+    const addSubtask = (subtasks:Array<{id:string,name:string,startTime:string,endTime:string,status:string}>) => {
+        setTaskCurrent({...taskCurrent, subtasks: subtasks})
+    }
+
     return (
         <Modal
             animationType="slide"
@@ -67,6 +72,7 @@ const TaskModal = ({task,modalVisibleEdit,setModalVisibleEdit}:{task:any,modalVi
                         <CategoryName category={taskCurrent.categoryName} handleChange={editTask}/>
                         <Priority priority={taskCurrent.priority} />
                         <Tags tags={taskCurrent.tags} handleChange={updateTag}/>
+                        <SubTask subTasks={taskCurrent.subtasks} handleChange={addSubtask}/>
                         <DueDate dueDate={taskCurrent.dueDate} handleChange={editTask}/>
                         <RemindMe date={taskCurrent.reminderDate} handleChange={editTask}/>
                         <Repeat repeat={taskCurrent.repeat} handleChange={() => {}}/> 
