@@ -24,7 +24,8 @@ const TaskModal = ({task,modalVisibleEdit,setModalVisibleEdit}:{task:any,modalVi
     }, [task])
     
     const updateTag = (tags:Array<string>) => {
-        setTaskCurrent({...taskCurrent, tags: tags})
+        const tagObject = tags.map((tag:string) => ({name:tag}))
+        setTaskCurrent({...taskCurrent,tags:tagObject})
     }
 
     const save = () => {
