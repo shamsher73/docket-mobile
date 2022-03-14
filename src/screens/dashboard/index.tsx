@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../app/store";
 import { analyticsCategoryRequested, analyticsRequested } from "./analyticsSlice";
 import Error from "../../components/Error";
-import { RefreshControl } from "react-native";
+import { Platform, RefreshControl } from "react-native";
 
 const Dashboard = ():JSX.Element => {
 
@@ -77,7 +77,7 @@ const Dashboard = ():JSX.Element => {
           }
         >
             {error && !isLoading && <Error error={error} />}
-            <Text fontStyle="normal" fontWeight="600" fontSize="20" lineHeight="30" fontFamily="Poppins">Overview</Text>
+            <Text fontFamily="Poppins" fontStyle="normal" fontWeight={Platform.OS === 'ios' ? "600" : "bold"} fontSize="20" lineHeight="30" >Overview</Text>
             <Filter filter={filter} filterValues={filterValues} filterHandler={(value) => filterHandler(value)} />
             <TotalHoursChart 
                 categories={taskCategoryData}

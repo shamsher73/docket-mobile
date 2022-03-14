@@ -42,6 +42,9 @@ const AddTask = ({ modalVisible, setModalVisible }: { modalVisible: boolean, set
                     <View>
                         <Image source={require('./../../../assets/images/user.png')} alignSelf="center" alt="user icon"/>
                     </View>
+                    <View>
+                        <Text fontFamily="Roboto" fontStyle="normal" fontWeight="700" fontSize="20" lineHeight="23">My Task</Text>
+                    </View>
                     <View mt="4" mb="4">
                         <Text fontFamily="Roboto" fontStyle="normal" fontWeight="normal" fontSize="12" lineHeight="14" color="#92929D" padding="0">TASK</Text>
                         <TextInput style={{ borderBottomWidth: 1, borderBottomColor: '#E2E2EA', padding: 0 }} onChangeText={(text: string) => { setTask(text) }} />
