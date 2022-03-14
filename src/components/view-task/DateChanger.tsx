@@ -18,7 +18,7 @@ const DateChanger = ({date,changeKey,handleChange,title}:{date:string,changeKey:
                             mode="date"
                             date={ date ? new Date(date) : new Date() }
                             onConfirm={(date) => {
-                                let dateFormat = (date.getMonth() + 1) + '/' + (date.getDate() + 1) + '/' + date.getFullYear()
+                                let dateFormat = (date.getMonth() + 1) + '/' + (date.getDate()) + '/' + date.getFullYear()
                                 handleChange(changeKey,dateFormat)
                                 setIsOpen(false)
                             }}
@@ -31,7 +31,7 @@ const DateChanger = ({date,changeKey,handleChange,title}:{date:string,changeKey:
                 {
                     !isOpen &&
                     <TouchableHighlight onPress={() => {setIsOpen(true)}}>
-                        <Text pt="2" fontFamily="Roboto" fontStyle="normal" fontWeight="normal" fontSize="14" lineHeight="16" letterSpacing="0.1">{date ? date : "-"}</Text>
+                        <Text pt="2" fontFamily="Roboto" fontStyle="normal" fontWeight="normal" fontSize="14" lineHeight="16" letterSpacing="0.1">{date ? new Date(date).toDateString() : "-"}</Text>
                     </TouchableHighlight>
                 }
             </View> 

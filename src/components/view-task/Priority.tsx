@@ -2,9 +2,9 @@ import { StyleSheet, Text, View } from "react-native";
 import PriorityIcon from './../../../assets/images/priority.svg';
 import React from "react";
 
-const Priority = ({priority}:{priority:string}) => {
+const Priority = ({priority,handleChange}:{priority:string,handleChange:any}) => {
 
-    const Priorities = ["urgent","high","medium","low"];
+    const Priorities = ["urgent","medium","low"];
     return (
         <View style={styles.container}>
             <PriorityIcon/>
@@ -14,7 +14,7 @@ const Priority = ({priority}:{priority:string}) => {
                 {
                     Priorities.map((priorit, index) => {
                         return (
-                            <Text style={(priorit === priority) ? styles.subText : styles.subTextUnselected} key={index}>{priorit}</Text>
+                            <Text rounded="xl" style={(priorit === priority) ? styles.subText : styles.subTextUnselected} key={index} onPress={() => handleChange('priority',priorit)}>{priorit}</Text>
                         )
                     })
                 }

@@ -9,7 +9,7 @@ const TaskTitle = ({ title, handleChange }: { title: string, handleChange: any }
             <View pl="3" justifyContent="center">
                 <OvalIcon />
             </View>
-            <TextChanger value={title} changeKey="" handleChange={handleChange} title="" />
+            <TextChanger value={title} changeKey="name" handleChange={handleChange} title="" />
         </View>
     );
 }

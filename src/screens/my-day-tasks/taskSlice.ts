@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { RootState } from '../../app/store';
 
 interface SubTask {
     title: string
@@ -20,6 +21,7 @@ interface TaskState {
     remindMe: string
     repeat: string
     status: string
+    isLoading: boolean
 }
 
 interface TaskAction {
@@ -39,11 +41,7 @@ const taskReducer = createSlice({
         },
         tasksSuccess : (state, action: TaskAction) => {
             state.isLoading = false;
-            action.payload.map(
-                (task:any) => {
-                    state.tasks.push(task)
-                }
-            )
+            state.tasks = action.payload;
         },
         tasksFailed : (state, action) => {
             state.isLoading = false;
@@ -79,48 +77,86 @@ const taskReducer = createSlice({
         },
 
 
-        taskUpdateRequested : (state, action: any) => {
-            state.isLoading = true;
+        taskUpdateRequested : (state:RootState, action: any) => {
+            const taskId = action.payload.id;
+            const newTasks = state.tasks.map(task => {
+                if(task.id === taskId) {
+                    task.isLoading = true;
+                }
+                return task;
+            });
+            state.tasks = newTasks;
             state.error = null;
         },
-        taskUpdateSuccess : (state, action: any) => {
+        taskUpdateSuccess : (state:RootState, action: any) => {
             const taskId = action.payload.id;
             const newTask = action.payload;
             const newTasks = state.tasks.map(task => {
                 if(task.id === taskId) {
+                    newTask.isLoading = false;
                     return newTask;
                 }
                 return task;
             });
             state.tasks = newTasks;
-            state.isLoading = false;
+
         },
-        taskUpdateFailed : (state, action) => {
-            state.isLoading = false;
+        taskUpdateFailed : (state:RootState, action) => {
+            const taskId = action.payload.id;
+            const newTasks = state.tasks.map(task => {
+                if(task.id === taskId) {
+                    task.isLoading = false;
+                }
+                return task;
+            });
+            state.tasks = newTasks;
             state.error = action.payload.error;
         },
 
-        // updateTask : (state, action: any) => {
-        //     const id = action.payload.id
-        //     const taskToUpdate = state.find((task:TaskState) => task.id === id)
-        //     const updatedTask = {
-        //         ...taskToUpdate,
-        //         ...action.payload
-        //     }
-        //     return state.map((task:TaskState) => task.id === id ? updatedTask : task)
-        // },
+        taskMarkCompleteRequested : (state, action: any) => {
+            const taskId = action.payload.id;
+            const newTasks = state.tasks.map(task => {
+                if(task.id === taskId) {
+                    task.isLoading = true;
+                }
+                return task;
+            });
+            state.tasks = newTasks;
+            state.error = null;
+        },
+        taskMarkCompleteSuccess : (state, action: any) => {
+            const taskId = action.payload.id;
+            const newTasks = state.tasks.map(task => {
+                if(task.id === taskId) {
+                    task.status = action.payload.status;
+                    task.isLoading = false;
+                }
+                return task;
+            });
+            state.tasks = newTasks;
+            // state.isLoading = false;
+        },
+        taskMarkCompleteFailed : (state, action) => {
+            const taskId = action.payload.id;
+            const newTasks = state.tasks.map(task => {
+                if(task.id === taskId) {
+                    task.isLoading = false;
+                }
+                return task;
+            });
+            state.tasks = newTasks;
+            state.error = action.payload.error;
+        },
 
-        //get filterd tasks
-        getFilteredTasks : (state, action: any) => {
-            return state.filter((task:TaskState) => task.status === action.payload)
-        }
+        // getFilteredTasks : (state, action: any) => {
+        //     return state.filter((task:TaskState) => task.status === action.payload)
+        // }
 
     },
 }
 )
 export const { 
-    updateTask, 
-    getFilteredTasks, 
+    // getFilteredTasks, 
     tasksRequested, 
     tasksSuccess, 
     tasksFailed,
@@ -136,6 +172,10 @@ export const {
     taskUpdateRequested,
     taskUpdateSuccess,
     taskUpdateFailed,
+
+    taskMarkCompleteRequested,
+    taskMarkCompleteSuccess,
+    taskMarkCompleteFailed
  } = taskReducer.actions
 
 export default taskReducer.reducer

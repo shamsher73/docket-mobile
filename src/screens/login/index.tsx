@@ -1,4 +1,4 @@
-import {Pressable} from "react-native";
+import {Platform, Pressable} from "react-native";
 import GoogleIcon from './../../../assets/images/Google.svg';
 import UserOnDesk from './../../../assets/images/user-on-desk.svg';
 import GeekyAntsLogo from './../../../assets/images/geeky-logo.svg';
@@ -13,7 +13,7 @@ const UserLogin = ({ navigation }: { navigation: any }):JSX.Element => {
             </View>
             <View justifyContent="flex-start" p="2">
                 <GeekyAntsLogo />
-                <Text fontStyle="normal" fontSize="20" fontWeight="600" fontFamily="Poppins">Log In to Your Account</Text>
+                <Text fontStyle="normal" fontSize="20" fontWeight={Platform.OS === 'ios' ? "600" : "bold"} fontFamily="Poppins">Log In to Your Account</Text>
                 <Pressable
                     onPress={() =>
                         navigation.navigate('Dashboard')
@@ -21,7 +21,7 @@ const UserLogin = ({ navigation }: { navigation: any }):JSX.Element => {
                 >
                     <HStack bg="#fc5a5a" justifyContent="center" p="2" rounded="xl">
                         <GoogleIcon width={20} height={20}/>
-                        <Text pl="2" fontStyle="normal" fontSize="16" fontWeight="600" lineHeight="24" fontFamily="Poppins" color="white">Continue with Google</Text>
+                        <Text pl="2" fontStyle="normal" fontSize="16" fontWeight={Platform.OS === 'ios' ? "600" : "bold"} lineHeight="24" fontFamily="Poppins" color="white">Continue with Google</Text>
                     </HStack>
                 </Pressable>
             </View>

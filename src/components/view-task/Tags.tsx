@@ -11,30 +11,23 @@ interface Tag {
     name:string
 }
 const Tags = ({tags,handleChange}:{tags:Array<Tag>,handleChange:any}):JSX.Element => {
+
+    const tagsArray = tags.map((tag:Tag) => tag.name)
     const [addTag, setAddTag] = useState(false);
     const [newTag, setNewTag] = useState({name:''});
-    // const [tagList, setTagList] = useState(tags);
-    // console.log("tags",tags);
+
     const createTag = ():void => {
         setAddTag(true);
     }
 
-    // const createNewTag = (e:any):void => {
-    //     setNewTag(e.target.value);
-    // }
-
     const saveTag = ():void => {
-        
-        // let allTags = tags;
-        // allTags.push(newTag);
-        // setTagList([...tagList,newTag]);
-        handleChange([...tags,newTag]);
+        handleChange([...tagsArray,newTag]);
         setAddTag(false);
 
     }
 
     const removeTag = (tag:string) => {
-        handleChange(tags.filter((t) => t.name !== tag));
+        handleChange(tagsArray.filter((t) => t !== tag));
     }
     return (
         <View style={styles.container}>
@@ -63,13 +56,13 @@ const Tags = ({tags,handleChange}:{tags:Array<Tag>,handleChange:any}):JSX.Elemen
                 </View>
                 <View>
                     {
-                        tags && 
-                        tags.map((tag:any, index:number) => {
+                        tagsArray && 
+                        tagsArray.map((tag:any, index:number) => {
                             return (
                                 <View style={styles.tag} key={index}>
                                     <OvalIcon />
-                                    <Text style={styles.tagText}>{tag.name}</Text>
-                                    <CancelIcon onPress={() => removeTag(tag.name) } style={styles.cancel}/>
+                                    <Text style={styles.tagText}>{tag}</Text>
+                                    <CancelIcon onPress={() => removeTag(tag) } style={styles.cancel}/>
                                 </View>
                             )   
                         })
@@ -114,7 +107,7 @@ const styles = StyleSheet.create({
         paddingLeft: 14,
     },
     headerText: {
-        // fontFamily: "Roboto",
+        fontFamily: "Roboto",
         fontStyle: "normal",
         fontWeight: "normal",
         fontSize: 12,
@@ -132,6 +125,7 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         alignItems: "center",
         padding: 5,
+        marginRight: 10,
     },
     cancel:{
         justifyContent: "flex-end",
