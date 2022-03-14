@@ -70,7 +70,7 @@ const TaskModal = ({task,modalVisibleEdit,setModalVisibleEdit}:{task:any,modalVi
                         <TaskTitle title={taskCurrent.name} handleChange={() => {}}/>
                         <Description description={taskCurrent.description} handleChange={editTask}/>
                         <CategoryName category={taskCurrent.categoryName} handleChange={editTask}/>
-                        <Priority priority={taskCurrent.priority} />
+                        <Priority priority={taskCurrent.priority} handleChange={editTask}/>
                         <Tags tags={taskCurrent.tags} handleChange={updateTag}/>
                         <SubTask subTasks={taskCurrent.subtasks} handleChange={addSubtask}/>
                         <DueDate dueDate={taskCurrent.dueDate} handleChange={editTask}/>
