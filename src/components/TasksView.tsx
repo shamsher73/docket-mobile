@@ -9,7 +9,7 @@ import React from "react";
 import { View, HStack, ScrollView, Pressable, Text, Spinner } from 'native-base';
 import FilterModal from "./FilterModal";
 import Error from "./Error";
-import { RefreshControl } from "react-native";
+import { RefreshControl, TouchableHighlight } from "react-native";
 import { taskMarkCompleteRequested, tasksRequested } from "../screens/my-day-tasks/taskSlice";
 import TaskModal from "./TaskModal";
 import AddTask from "../screens/my-day-tasks/AddTask";
@@ -99,11 +99,11 @@ const TasksView = ({ filterByDueDate }: { filterByDueDate: boolean }) => {
                     </HStack>
                     : list}
             </ScrollView>
-            <Pressable onPress={() => setModalVisible(true)}>
+            <TouchableHighlight onPress={() => setModalVisible(true)} >
                 <View position="absolute" right="5" bottom="5" width="20" height="20" bg="#6b8ae6" borderRadius="40" justifyContent="center" alignItems="center">
-                    <Add />
+                    <Add onPress={() => setModalVisible(true)} />
                 </View>
-            </Pressable>
+            </TouchableHighlight>
             <AddTask modalVisible={modalVisible} setModalVisible={setModalVisible} />
             <TaskModal
                 task={task}
