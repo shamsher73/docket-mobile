@@ -75,7 +75,7 @@ const TaskModal = ({task,modalVisibleEdit,setModalVisibleEdit}:{task:any,modalVi
                         <SubTask subTasks={taskCurrent.subtasks} handleChange={addSubtask}/>
                         <DueDate dueDate={taskCurrent.dueDate} handleChange={editTask}/>
                         <RemindMe date={taskCurrent.reminderDate} handleChange={editTask}/>
-                        <Repeat repeat={taskCurrent.repeat} handleChange={() => {}}/> 
+                        <Repeat repeat={taskCurrent.repeat} handleChange={editTask}/> 
                     </ScrollView>
                     <View bg="white" flex="1" flexDirection="row" justifyContent="space-between" alignItems="center" pr="5" pl="5" shadow="6">
                         <Pressable onPress={() => deleteTask()}>

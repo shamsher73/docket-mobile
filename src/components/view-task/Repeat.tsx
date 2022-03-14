@@ -1,31 +1,24 @@
 
-import { useState } from 'react';
-import { Button, StyleSheet, Text, TextInput, TouchableHighlight, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import RepeatIcon from './../../../assets/images/repeat.svg';
 import React from "react";
+import ModalDropdown from 'react-native-modal-dropdown';
+
 
 const Repeat = ({ repeat,handleChange }:{repeat:string,handleChange:any}) => {
-    const [isOpen, setIsOpen] = useState(false);
-    // const [newCategory, setNewCategory] = useState(category);
+    const RepeatOptions = ["daily","weekly","monthly","yearly"];
 
+    const setSelectedValue = (index:number) => {
+        handleChange('repeat',RepeatOptions[index])
+    }
     return (
         <View style={styles.container}>
             <RepeatIcon/>
             <View style={styles.subContainer}>
                 <Text style={styles.headerText}>REPEAT</Text>
-                {
-                    isOpen &&
-                    <View style={styles.updateBox}>
-                        {/* <TextInput style={styles.input} value={newCategory} onChangeText={(text) => setNewCategory(text)} /> */}
-                        {/* <Button title="Update" onPress={() => {handleChange('description',newCategory);setIsOpen(false)}}/> */}
-                    </View>
-                }
-                {
-                    !isOpen &&
-                    <TouchableHighlight onPress={() => {setIsOpen(true)}}>
-                        <Text style={styles.subText}>{repeat ? repeat : "-"}</Text>
-                    </TouchableHighlight>
-                }
+                <View style={styles.updateBox}>
+                    <ModalDropdown textStyle={{fontSize:14}} dropdownStyle={{paddingLeft:30,paddingRight:30}} style={{ width:100}} options={RepeatOptions} defaultValue={repeat} onSelect={(index) => setSelectedValue(index)} />
+                </View>
             </View>
             
         </View>
@@ -45,6 +38,8 @@ const styles = StyleSheet.create({
         display: "flex",
         flexDirection: "row",
         justifyContent: "space-between",
+        alignItems: "center",
+        fontColor: "#44444F",
     },
     input: {
         width: "80%",
@@ -54,7 +49,7 @@ const styles = StyleSheet.create({
         paddingLeft: 14,
     },
     headerText: {
-        // fontFamily: "Roboto",
+        fontFamily: "Roboto",
         fontStyle: "normal",
         fontWeight: "normal",
         fontSize: 12,
@@ -62,7 +57,7 @@ const styles = StyleSheet.create({
         color: "#92929D",
     },
     subText: {
-        // fontFamily: "Roboto",
+        fontFamily: "Roboto",
         fontStyle: "normal",
         fontWeight: "normal",
         fontSize: 14,
