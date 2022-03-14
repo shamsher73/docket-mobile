@@ -67,7 +67,7 @@ const TaskModal = ({task,modalVisibleEdit,setModalVisibleEdit}:{task:any,modalVi
                         </Pressable>
                     </View>
                     <ScrollView height="4/5" bg="white">
-                        <TaskTitle title={taskCurrent.name} handleChange={() => {}}/>
+                        <TaskTitle title={taskCurrent.name} handleChange={editTask}/>
                         <Description description={taskCurrent.description} handleChange={editTask}/>
                         <CategoryName category={taskCurrent.categoryName} handleChange={editTask}/>
                         <Priority priority={taskCurrent.priority} handleChange={editTask}/>
