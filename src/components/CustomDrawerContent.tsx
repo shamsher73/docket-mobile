@@ -1,28 +1,33 @@
-import { DrawerContentScrollView, DrawerItem, DrawerItemList } from "@react-navigation/drawer";
+import { DrawerContentComponentProps, DrawerContentScrollView, DrawerItem, DrawerItemList} from "@react-navigation/drawer";
 import { StyleSheet } from "react-native";
 import React, { useState } from "react";
 import UserIcon from "./UserIcon";
+import { DrawerNavigationHelpers } from "@react-navigation/drawer/lib/typescript/src/types";
 
-const CustomDrawerContent = (props) => {
-    const [currentRoute, setCurrentRoute] = useState('Dashboard');
+const RouteItem = ({name,setCurrentRoute,navigation,currentRoute}:{name:string,setCurrentRoute:React.Dispatch<React.SetStateAction<string>>,navigation:DrawerNavigationHelpers,currentRoute:string}) => {
+    return (
+        <DrawerItem label={name} onPress={() => {setCurrentRoute(name);navigation.navigate(name)}} labelStyle={currentRoute == name ? styles.drawerContentSelected : styles.drawerContent} />
+    )
+}
+
+const CustomDrawerContent = (props:DrawerContentComponentProps) => {
+    const [currentRoute, setCurrentRoute] = useState<string>('Dashboard');
     const {navigation} = props;
+    const Labels = ['Dashboard','My Day Tasks','My Tasks','History', 'Lists', 'Category and Tags'];
+    const DrawerList = Labels.map((name,index) => 
+                                <RouteItem key={index} name={name} currentRoute={currentRoute} setCurrentRoute={setCurrentRoute} navigation={navigation} />       
+    );
     return (
         <DrawerContentScrollView {...props} >
           <DrawerItemList {...props}   />
-         
-        <DrawerItem label="Shivam Chaudhary" onPress={() => alert('Not accessible')} style={styles.header} labelStyle={styles.headerText}
-            icon={() => <UserIcon /> }
-        />
-          <DrawerItem label="Dashboard" onPress={() => {setCurrentRoute("Dashboard");navigation.navigate('Dashboard')}} labelStyle={currentRoute == "Dashboard" ? styles.drawerContentSelected : styles.drawerContent} />
-          <DrawerItem label="My Day Tasks" onPress={() => {setCurrentRoute("My Day Tasks");navigation.navigate('My Day Tasks')}} labelStyle={currentRoute == "My Day Tasks" ? styles.drawerContentSelected : styles.drawerContent} />
-          <DrawerItem label="Tasks" onPress={() => {setCurrentRoute("My Tasks");navigation.navigate('My Tasks')}} labelStyle={currentRoute == "My Tasks" ? styles.drawerContentSelected : styles.drawerContent} />
-          <DrawerItem label="History" onPress={() => {}} labelStyle={currentRoute == "History" ? styles.drawerContentSelected : styles.drawerContent} />
-          <DrawerItem label="Lists" onPress={() => {}} labelStyle={currentRoute == "Lists" ? styles.drawerContentSelected : styles.drawerContent} />
-          <DrawerItem label="Category and Tags" onPress={() => {}} labelStyle={currentRoute == "Category and Tags" ? styles.drawerContentSelected : styles.drawerContent} />
-
+            <DrawerItem label="Shivam Chaudhary" onPress={() => {}} style={styles.header} labelStyle={styles.headerText}
+                icon={() => <UserIcon /> }
+            />
+            {DrawerList}
         </DrawerContentScrollView>
       );
 }
+
 
 const styles = StyleSheet.create({
     header: {

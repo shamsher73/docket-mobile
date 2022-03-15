@@ -4,18 +4,15 @@ import { Dimensions, StyleSheet, Text, View } from 'react-native';
 import {
     StackedBarChart
 } from "react-native-chart-kit";
-import { LogBox } from 'react-native';
 import React from "react";
 
 function WorkingHoursChart({ labels, dataset,legends }: { labels: Array<string>, dataset: Array<Array<number>>, legends: Array<string> }) {
-    LogBox.ignoreLogs(['sdfdsf: ...']);
     const colors = ["#6b89e6", "#64b3eb", "#e2e2eb"]
     const data = {
         labels: labels,
         legend: legends,
         data: dataset,
         barColors: colors,
-        
     };
     const screenWidth = Dimensions.get("window").width;
     return (

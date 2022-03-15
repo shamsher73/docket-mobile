@@ -4,11 +4,9 @@ import React, { useState } from "react";
 import CloseIcon from './../../assets/images/close.svg';
 import DatePicker from "react-native-date-picker";
 
-
-
 const FilterModal = ({ modalVisible, setModalVisible, changeCustomFilter }: {
-    modalVisible: boolean, setModalVisible: any,
-     changeCustomFilter: any
+    modalVisible: boolean, setModalVisible: React.Dispatch<React.SetStateAction<boolean>>,
+     changeCustomFilter: Function
 }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [date, setDate] = useState(new Date());

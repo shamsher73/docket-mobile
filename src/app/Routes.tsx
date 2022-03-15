@@ -9,10 +9,11 @@ import React from "react";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import MyTasks from "../screens/my-tasks";
 
+
 const Routes = () => {
-    const Drawer = createDrawerNavigator();
+    const Drawer = createDrawerNavigator()
     const options = {
-        headerTitle: (props:any) => <HeaderMenu {...props} />,
+        headerTitle: (props) => <HeaderMenu {...props} />,
         headerRight: () => <HeaderRight />,
         drawerItemStyle: { height: 0 },
         headerStyle: {
@@ -25,7 +26,7 @@ const Routes = () => {
 
     const hiddenItem = { headerShown: false, drawerItemStyle: { height: 0 } }
     return (
-        <Drawer.Navigator initialRouteName="Login" drawerContent={(props:any) => <CustomDrawerContent {...props} />}>
+        <Drawer.Navigator initialRouteName="Login" drawerContent={(props) => <CustomDrawerContent {...props} />}>
             <Drawer.Screen name="Login" component={UserLogin} options={hiddenItem} />
             <Drawer.Screen name="Dashboard" component={Dashboard} options={options} />
             <Drawer.Screen name="My Day Tasks" component={MyDayTasks} options={options} />

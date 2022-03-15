@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Modal } from "react-native";
 import { useDispatch } from "react-redux";
-import { removeTask, taskRemoveRequested, taskUpdateRequested, updateTask } from "../screens/my-day-tasks/taskSlice";
+import { removeTask, taskRemoveRequested, TaskState, taskUpdateRequested, updateTask } from "../screens/my-day-tasks/taskSlice";
 import CloseIcon from './../../assets/images/close.svg';
 import TaskTitle from "./view-task/TaskTitle";
 import Description from "./view-task/Description";
@@ -17,7 +17,7 @@ import { View, Text, ScrollView, Pressable } from 'native-base';
 import SubTask from "./view-task/SubTask";
 
 
-const TaskModal = ({task,modalVisibleEdit,setModalVisibleEdit}:{task:any,modalVisibleEdit:any,setModalVisibleEdit:any}) => {
+const TaskModal = ({task,modalVisibleEdit,setModalVisibleEdit}:{task:TaskState,modalVisibleEdit:boolean,setModalVisibleEdit:React.Dispatch<React.SetStateAction<boolean>>}) => {
     const dispatch = useDispatch()
     const [taskCurrent, setTaskCurrent] = useState(task)
     useEffect(() => {

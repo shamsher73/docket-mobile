@@ -9,5 +9,6 @@ export const callAPI = async ({ url, method, data }:{url:string, method:string, 
         Authorization: "Bearer " + accessToken,
         "Content-Type": "application/json"
     }
+    console.log("URL: ", baseUrl + url);
     return await axios({method: method, url: baseUrl+url, headers: headers, data:data})
 };

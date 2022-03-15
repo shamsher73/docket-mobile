@@ -10,11 +10,11 @@ import { Button, StyleSheet, Text, TextInput, TouchableHighlight, View } from 'r
 interface Tag {
     name:string
 }
-const Tags = ({tags,handleChange}:{tags:Array<Tag>,handleChange:any}):JSX.Element => {
+const Tags = ({tags,handleChange}:{tags:Array<Tag>,handleChange:Function}):JSX.Element => {
 
     const tagsArray = tags.map((tag:Tag) => tag.name)
     const [addTag, setAddTag] = useState(false);
-    const [newTag, setNewTag] = useState({name:''});
+    const [newTag, setNewTag] = useState('');
 
     const createTag = ():void => {
         setAddTag(true);
@@ -38,7 +38,7 @@ const Tags = ({tags,handleChange}:{tags:Array<Tag>,handleChange:any}):JSX.Elemen
                     {
                         addTag &&
                         <View style={styles.updateBox}>
-                            <TextInput style={styles.input} value={newTag.name} onChangeText={(text) => setNewTag(text)} />
+                            <TextInput style={styles.input} value={newTag} onChangeText={(text:string) => setNewTag(text)} />
                             <Button title="Save" onPress={saveTag}/>
                         </View>
 
@@ -57,7 +57,7 @@ const Tags = ({tags,handleChange}:{tags:Array<Tag>,handleChange:any}):JSX.Elemen
                 <View>
                     {
                         tagsArray && 
-                        tagsArray.map((tag:any, index:number) => {
+                        tagsArray.map((tag:string, index:number) => {
                             return (
                                 <View style={styles.tag} key={index}>
                                     <OvalIcon />

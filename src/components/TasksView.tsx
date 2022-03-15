@@ -9,8 +9,8 @@ import React from "react";
 import { View, HStack, ScrollView, Pressable, Text, Spinner } from 'native-base';
 import FilterModal from "./FilterModal";
 import Error from "./Error";
-import { RefreshControl, TouchableHighlight } from "react-native";
-import { taskMarkCompleteRequested, tasksRequested } from "../screens/my-day-tasks/taskSlice";
+import { RefreshControl,TouchableHighlight } from "react-native";
+import { taskMarkCompleteRequested, tasksRequested, TaskState } from "../screens/my-day-tasks/taskSlice";
 import TaskModal from "./TaskModal";
 import AddTask from "../screens/my-day-tasks/AddTask";
 
@@ -42,22 +42,22 @@ const TasksView = ({ filterByDueDate }: { filterByDueDate: boolean }) => {
         setFilter(filter);
     }
 
-    const changeCustomFilter = (key, value) => {
+    const changeCustomFilter = (key:string, value:string) => {
         setCustomFilter({
             ...customFilter,
             [key]: value
         })
     }
 
-    const filteredListTemp = (filter === 'all') ? tasks : tasks.filter(task => task.status === filter);
-    const filteredList = (filterByDueDate) ? filteredListTemp.filter(task => (task.dueDate.substring(0, 10) === new Date().toISOString().split('T')[0])) : filteredListTemp;
+    const filteredListTemp = (filter === 'all') ? tasks : tasks.filter((task:TaskState) => task.status === filter);
+    const filteredList = (filterByDueDate) ? filteredListTemp.filter((task:TaskState) => (task.dueDate.substring(0, 10) === new Date().toISOString().split('T')[0])) : filteredListTemp;
 
-    const toggleStatus = (task) => {
+    const toggleStatus = (task:TaskState) => {
         dispatch(taskMarkCompleteRequested({ id: task.id, status: task.status === 'completed' ? 'pending' : 'completed' }));
     }
 
     const list = filteredList && filteredList.length > 0 ?
-        filteredList.map((row: any) =>
+        filteredList.map((row: TaskState) =>
             <TaskTable row={row} handleModal={openModal} key={row.id} toggleStatus={toggleStatus} />
         ) :
         <Text>No tasks found</Text>
