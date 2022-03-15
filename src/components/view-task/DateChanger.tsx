@@ -4,7 +4,7 @@ import { useState } from "react";
 import { TouchableHighlight } from "react-native"
 import DatePicker from "react-native-date-picker";
 
-const DateChanger = ({date,changeKey,handleChange,title}:{date:string,changeKey:string,handleChange:any,title:string}) => {
+const DateChanger = ({date,changeKey,handleChange,title}:{date:string,changeKey:string,handleChange:Function,title:string}) => {
     const [isOpen, setIsOpen] = useState(false);
     return (
         <View flex="1" pl="3">

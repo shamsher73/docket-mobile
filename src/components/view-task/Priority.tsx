@@ -1,9 +1,9 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import PriorityIcon from './../../../assets/images/priority.svg';
 import React from "react";
+import { Text } from "native-base";
 
-const Priority = ({priority,handleChange}:{priority:string,handleChange:any}) => {
-
+const Priority = ({priority,handleChange}:{priority:string,handleChange:Function}) => {
     const Priorities = ["urgent","medium","low"];
     return (
         <View style={styles.container}>

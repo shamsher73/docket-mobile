@@ -5,7 +5,7 @@ import React from "react";
 import ModalDropdown from 'react-native-modal-dropdown';
 
 
-const Repeat = ({ repeat,handleChange }:{repeat:string,handleChange:any}) => {
+const Repeat = ({ repeat,handleChange }:{repeat:string,handleChange:Function}) => {
     const RepeatOptions = ["daily","weekly","monthly","yearly"];
 
     const setSelectedValue = (index:number) => {
@@ -17,7 +17,7 @@ const Repeat = ({ repeat,handleChange }:{repeat:string,handleChange:any}) => {
             <View style={styles.subContainer}>
                 <Text style={styles.headerText}>REPEAT</Text>
                 <View style={styles.updateBox}>
-                    <ModalDropdown textStyle={{fontSize:14}} dropdownStyle={{paddingLeft:30,paddingRight:30}} style={{ width:100}} options={RepeatOptions} defaultValue={repeat} onSelect={(index) => setSelectedValue(index)} />
+                    <ModalDropdown textStyle={{fontSize:14}} dropdownStyle={{paddingLeft:30,paddingRight:30}} style={{ width:100}} options={RepeatOptions} defaultValue={repeat} onSelect={(index:number) => setSelectedValue(index)} />
                 </View>
             </View>
             

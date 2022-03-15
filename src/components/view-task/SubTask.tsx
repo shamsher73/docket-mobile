@@ -14,7 +14,7 @@ interface SubTask {
     startTime:string
     endTime:string
 }
-const SubTask = ({subTasks,handleChange}:{subTasks:Array<SubTask>,handleChange:any}):JSX.Element => {
+const SubTask = ({subTasks,handleChange}:{subTasks:Array<SubTask>,handleChange:Function}):JSX.Element => {
     const [isStartOpen, setIsStartOpen] = useState(false);
     const [isEndOpen, setIsEndOpen] = useState(false);
     const [addSubtask, setAddSubtask] = useState(false);
