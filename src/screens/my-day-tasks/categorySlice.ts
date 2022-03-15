@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
 
 
-const taskReducer = createSlice({
+const categoryReducer = createSlice({
     name : 'category',
     initialState: {
         categories: [],
@@ -10,15 +10,14 @@ const taskReducer = createSlice({
         error: null
     },
     reducers : {
-        categoryRequested : (state, action: any) => {
-            state.isCategoryLoading = true;
-            state.error = null;
+        categoryRequested : () => {
+            return {categories: [], isCategoryLoading: true, error: null};
         },
-        categoryRequestedSuccess : (state, action: any) => {
+        categoryRequestedSuccess : (state:RootState, action) => {
             state.isCategoryLoading = false;
             state.categories = action.payload         
         },
-        categoryRequestedFailed : (state, action) => {
+        categoryRequestedFailed : (state:RootState, action) => {
             state.isCategoryLoading = false;
             state.error = action.payload.error;
         },
@@ -29,6 +28,6 @@ export const {
     categoryRequested,
     categoryRequestedSuccess,
     categoryRequestedFailed
- } = taskReducer.actions
+ } = categoryReducer.actions
 
-export default taskReducer.reducer
+export default categoryReducer.reducer

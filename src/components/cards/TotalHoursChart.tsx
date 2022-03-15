@@ -13,19 +13,13 @@ const colors = ['#6b89e6', '#ffc542', '#64b3eb', '#e2e2eb']
 const TotalHoursChart = (): JSX.Element => {
   const taskCategoryData = useSelector((state: RootState) => state.analytics.categoryData);
   const taskCategoryLoading = useSelector((state: RootState) => state.analytics.isCategoryLoading);
-  const labelList = taskCategoryData && taskCategoryData.map((category: CategoryType,index:number) => {
-    if((index%2) === 0 && index < taskCategoryData.length-1)
-    {
-      return (
-        <View flexDirection="row">
-        {taskCategoryData && taskCategoryData.length > index && <Legend index={index} taskCategoryData={taskCategoryData} />}
-        {taskCategoryData && taskCategoryData.length > index+1 && <Legend index={index+1} taskCategoryData={taskCategoryData} />}
-        </View>
-      )
-    }
-  });
-  const data = taskCategoryData ? taskCategoryData.map((category:CategoryType) => category.time) : [];
-  const pieData = data
+
+  const sortedList = taskCategoryData && [...taskCategoryData].sort((a, b) => (a.time > b.time) ? -1 : 1);
+  const remainingHours = sortedList && sortedList.slice(3).map((category:CategoryType) => category.time).reduce((sum:number, value:number) => sum + value, 0)
+  const data = sortedList && [...sortedList.slice(0, 3), { categoryName: "More", time: remainingHours}];
+
+  const topTimes = sortedList ? data.map((category:CategoryType) => category.time) : [];
+  const pieData = topTimes
     .map((value:number, index:number) => ({
       value,
       svg: {
@@ -33,14 +27,26 @@ const TotalHoursChart = (): JSX.Element => {
       },
       key: `pie-${index}`,
     }))
-  const totalHours = data.reduce((sum:number, value:number) => sum + value, 0);
+  const totalHours = topTimes.reduce((sum:number, value:number) => sum + value, 0);
+
+  const labelList = taskCategoryData && data.map((category: CategoryType,index:number) => {
+    if((index%2) === 0 && index < data.length-1)
+    {
+      return (
+        <View flexDirection="row">
+        {data && data.length > index && <Legend index={index} taskCategoryData={data} />}
+        {data && data.length > index+1 && <Legend index={index+1} taskCategoryData={data} />}
+        </View>
+      )
+    }
+  });
 
   return (
     <View flex="1" bg="white" p="4" mt="2" rounded="xl">
       <Text fontFamily="Roboto" fontStyle="normal" fontWeight="bold" fontSize="16" lineHeight="19" letterSpacing="0.5" textTransform="uppercase">TOTAL WORKING HOURS</Text>
-      {(taskCategoryLoading == undefined || taskCategoryLoading) && <Spinner accessibilityLabel="Loading posts" size="lg" color="black.800" mt="3" />}
+      {(taskCategoryLoading == undefined || taskCategoryLoading == true) && <Spinner accessibilityLabel="Loading posts" size="lg" color="black.800" mt="3" />}
       {
-        taskCategoryLoading === false && data &&
+        taskCategoryLoading === false &&
         <View justifyContent="center">
           <PieChart style={{ height: 200 }} data={pieData} outerRadius="80%" innerRadius="90" padAngle={0} />
           <Text position="absolute" alignSelf="center" fontFamily="poppins" fontStyle="normal" fontWeight="600" fontSize="22" lineHeight="33" letterSpacing="0.11">{totalHours / 60} hrs</Text>

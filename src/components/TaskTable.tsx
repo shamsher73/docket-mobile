@@ -1,34 +1,11 @@
-import { useState } from "react";
 import {TouchableHighlight } from "react-native";
 import Unchecked from './../../assets/images/unchecked.svg';
 import Checked from './../../assets/images/checked.svg';
 import React from "react";
 import {View, Text, Spinner} from 'native-base';
+import { TaskState } from "../screens/my-day-tasks/taskSlice";
 
-interface SubTask {
-    title: string
-    startTime: string
-    endTime: string
-    status: string
-}
-
-interface TaskState {
-    id:number
-    name: string
-    description: string
-    priority: string
-    subTasks: SubTask[]
-    categoryName: string | never
-    tags: string[]
-    time: number
-    due_date: string
-    remind_me: string
-    repeat: string
-    status: string
-}
-
-const TaskTable = ({row,handleModal,toggleStatus}:{row:TaskState,handleModal:any,toggleStatus:any}) => {
-
+const TaskTable = ({row,handleModal,toggleStatus}:{row:TaskState,handleModal:Function,toggleStatus:Function}) => {
     return (
         <View flex="1" flexDirection="row" bg={row.status == "completed" ? "#F6FFFB" : "#EDF1F9"} justifyContent="space-between" p="3" mt="2" shadow="0.05" rounded="xl">
             <TouchableHighlight onPress={() => handleModal(row)}>

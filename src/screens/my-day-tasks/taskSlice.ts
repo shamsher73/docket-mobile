@@ -8,7 +8,7 @@ interface SubTask {
     status: string
 }
 
-interface TaskState {
+export interface TaskState {
     id:number
     name: string
     description: string
@@ -60,7 +60,7 @@ const taskReducer = createSlice({
         taskRemoveRequested : (state:RootState, action: TaskAction) => {
             return {...state, isLoading: true, error: null};
         },
-        taskRemoveSuccess : (state:RootState, action: any) => {
+        taskRemoveSuccess : (state:RootState, action: TaskAction) => {
             state.tasks = state.tasks.filter((task:TaskState) => task.id !== action.payload.id);
             state.isLoading = false;
         },
@@ -68,11 +68,11 @@ const taskReducer = createSlice({
             return {...state, isLoading: false, error: action.payload};
         },
 
-        taskUpdateRequested : (state:RootState, action: any) => {
+        taskUpdateRequested : (state:RootState, action: TaskAction) => {
             state.tasks = getTasksWithUpdatedLoading(state,action.payload.id,true);
             state.error = null;
         },
-        taskUpdateSuccess : (state:RootState, action: any) => {
+        taskUpdateSuccess : (state:RootState, action: TaskAction) => {
             const newTask = action.payload;
             const newTasks = state.tasks.map(task => {
                 if(task.id === action.payload.id) {
@@ -88,11 +88,11 @@ const taskReducer = createSlice({
             state.error = action.payload.error;
         },
 
-        taskMarkCompleteRequested : (state:RootState, action: any) => {
+        taskMarkCompleteRequested : (state:RootState, action: TaskAction) => {
             state.tasks = getTasksWithUpdatedLoading(state,action.payload.id,true);
             state.error = null;
         },
-        taskMarkCompleteSuccess : (state:RootState, action: any) => {
+        taskMarkCompleteSuccess : (state:RootState, action: TaskAction) => {
             const taskId = action.payload.id;
             const newTasks = state.tasks.map(task => {
                 if(task.id === taskId) {

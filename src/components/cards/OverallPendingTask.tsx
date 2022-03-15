@@ -1,4 +1,4 @@
-import { Dimensions, StyleSheet} from "react-native";
+import { Dimensions} from "react-native";
 import * as Progress from 'react-native-progress';
 import React from "react";
 import {View, Text, Spinner} from 'native-base';

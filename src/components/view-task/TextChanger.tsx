@@ -3,7 +3,7 @@ import { Button, Text, View } from "native-base";
 import { useState } from "react";
 import { TextInput, TouchableHighlight } from "react-native";
 
-const TextChanger = ({value,changeKey,handleChange,title}:{value:string,changeKey:string,handleChange:any,title:string}) => {
+const TextChanger = ({value,changeKey,handleChange,title}:{value:string,changeKey:string,handleChange:Function,title:string}) => {
     const [isOpen, setIsOpen] = useState(false);
     const [newCategory, setNewCategory] = useState('');
 
