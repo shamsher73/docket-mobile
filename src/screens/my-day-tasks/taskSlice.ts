@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
 
 interface SubTask {
@@ -36,95 +36,63 @@ const taskReducer = createSlice({
         error: null
     },
     reducers : {
-        tasksRequested() {
+        tasksRequested : () =>  {
             return {tasks: [],isLoading: true, error: null};
         },
         tasksSuccess : (state, action: TaskAction) => {
-            state.isLoading = false;
-            state.tasks = action.payload;
+            return {tasks: action.payload, isLoading: false, error: null};
         },
-        tasksFailed : (state, action) => {
-            state.isLoading = false;
-            state.error = action.payload.error;
+        tasksFailed : (state:RootState, action) => {
+            return {tasks: [], isLoading: false, error: action.payload};
         },
 
-        taskAddRequested(state, action: TaskAction) {
-            state.isLoading = true;
-            state.error = null;
+        taskAddRequested : (state:RootState, action: TaskAction) =>{
+            return {...state, isLoading: true, error: null};
         },
-        taskAddSuccess : (state, action: TaskAction) => {
-            const newTask = action.payload;
-            state.tasks.push(newTask);
+        taskAddSuccess : (state:RootState, action: TaskAction) => {     
+            state.tasks.push(action.payload);
             state.isLoading = false;
         },
-        taskAddFailed : (state, action) => {
-            state.error = action.payload.error;
-            state.isLoading = false;
+        taskAddFailed : (state:RootState, action) => {
+            return {...state, isLoading: false, error: action.payload};
         },
 
-        taskRemoveRequested : (state, action: any) => {
-            state.isLoading = true;
-            state.error = null;
+        taskRemoveRequested : (state:RootState, action: TaskAction) => {
+            return {...state, isLoading: true, error: null};
         },
-        taskRemoveSuccess : (state, action: any) => {
-            const taskId = action.payload.id;
-            const newTasks = state.tasks.filter(task => task.id !== taskId);
-            state.tasks = newTasks;
+        taskRemoveSuccess : (state:RootState, action: any) => {
+            state.tasks = state.tasks.filter((task:TaskState) => task.id !== action.payload.id);
             state.isLoading = false;
         },
-        taskRemoveFailed : (state, action) => {
-            state.error = action.payload.error;
+        taskRemoveFailed : (state:RootState, action) => {
+            return {...state, isLoading: false, error: action.payload};
         },
-
 
         taskUpdateRequested : (state:RootState, action: any) => {
-            const taskId = action.payload.id;
-            const newTasks = state.tasks.map(task => {
-                if(task.id === taskId) {
-                    task.isLoading = true;
-                }
-                return task;
-            });
-            state.tasks = newTasks;
+            state.tasks = getTasksWithUpdatedLoading(state,action.payload.id,true);
             state.error = null;
         },
         taskUpdateSuccess : (state:RootState, action: any) => {
-            const taskId = action.payload.id;
             const newTask = action.payload;
             const newTasks = state.tasks.map(task => {
-                if(task.id === taskId) {
+                if(task.id === action.payload.id) {
                     newTask.isLoading = false;
                     return newTask;
                 }
                 return task;
             });
             state.tasks = newTasks;
-
         },
         taskUpdateFailed : (state:RootState, action) => {
-            const taskId = action.payload.id;
-            const newTasks = state.tasks.map(task => {
-                if(task.id === taskId) {
-                    task.isLoading = false;
-                }
-                return task;
-            });
-            state.tasks = newTasks;
+            state.tasks = getTasksWithUpdatedLoading(state,action.payload.id,false);
             state.error = action.payload.error;
         },
 
-        taskMarkCompleteRequested : (state, action: any) => {
-            const taskId = action.payload.id;
-            const newTasks = state.tasks.map(task => {
-                if(task.id === taskId) {
-                    task.isLoading = true;
-                }
-                return task;
-            });
-            state.tasks = newTasks;
+        taskMarkCompleteRequested : (state:RootState, action: any) => {
+            state.tasks = getTasksWithUpdatedLoading(state,action.payload.id,true);
             state.error = null;
         },
-        taskMarkCompleteSuccess : (state, action: any) => {
+        taskMarkCompleteSuccess : (state:RootState, action: any) => {
             const taskId = action.payload.id;
             const newTasks = state.tasks.map(task => {
                 if(task.id === taskId) {
@@ -134,29 +102,26 @@ const taskReducer = createSlice({
                 return task;
             });
             state.tasks = newTasks;
-            // state.isLoading = false;
         },
-        taskMarkCompleteFailed : (state, action) => {
-            const taskId = action.payload.id;
-            const newTasks = state.tasks.map(task => {
-                if(task.id === taskId) {
-                    task.isLoading = false;
-                }
-                return task;
-            });
-            state.tasks = newTasks;
+        taskMarkCompleteFailed : (state:RootState, action) => {
+            state.tasks = getTasksWithUpdatedLoading(state,action.payload.id,false);
             state.error = action.payload.error;
         },
-
-        // getFilteredTasks : (state, action: any) => {
-        //     return state.filter((task:TaskState) => task.status === action.payload)
-        // }
-
     },
 }
 )
+
+const getTasksWithUpdatedLoading = (state:RootState,taskId:number,isLoading:boolean) => {
+    const allTasks = state.tasks.map((task:TaskState) => {
+        if(task.id === taskId) {
+            task.isLoading = isLoading;
+        }
+        return task
+    });
+    return allTasks
+}
+
 export const { 
-    // getFilteredTasks, 
     tasksRequested, 
     tasksSuccess, 
     tasksFailed,

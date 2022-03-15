@@ -30,7 +30,7 @@ interface TaskState {
 const TaskTable = ({row,handleModal,toggleStatus}:{row:TaskState,handleModal:any,toggleStatus:any}) => {
 
     return (
-        <View flex="1" flexDirection="row" bg={row.status == "completed" ? "#F6FFFB" : "#EDF1F9"} justifyContent="space-between" p="3" mt="2" shadow="0.05">
+        <View flex="1" flexDirection="row" bg={row.status == "completed" ? "#F6FFFB" : "#EDF1F9"} justifyContent="space-between" p="3" mt="2" shadow="0.05" rounded="xl">
             <TouchableHighlight onPress={() => handleModal(row)}>
                 <View>
                     <Text fontFamily="Roboto" fontStyle="normal" fontSize="16" fontWeight="bold" letterSpacing="0.5">{row.name}</Text>

@@ -14,22 +14,14 @@ import { Platform, RefreshControl } from "react-native";
 const Dashboard = ():JSX.Element => {
 
     const dispatch = useDispatch();
-    const labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'];
-    const legends = ['Category 1', 'Category 2', 'More'];
-    const dataset = [[10, 20, 10], [10, 40,50], [10, 10, 10], [10, 20, 10], [10, 40,50], [10, 10, 10], [10, 20, 10]];
     const filterValues = ["today", "week", "month","year","custom"];
-    const [filter, setFilter] = React.useState("year");
+    const [filter, setFilter] = useState("year");
+
     const taskSuccessData = useSelector((state: RootState) => state.analytics.data);
     const isLoading = useSelector((state: RootState) => state.analytics.isSuccessLoading);
     const error = useSelector((state: RootState) => state.analytics.error);
-    const taskCategoryData = useSelector((state: RootState) => state.analytics.categoryData);
-    const taskCategoryLoading = useSelector((state: RootState) => state.analytics.isCategoryLoading);
 
-    const todayDate = new Date();
-    const [dateRange, setDateRange] = React.useState({
-        "startDate": "",
-        "endDate": ""
-    });
+
     useEffect(() => {
         filterHandler(filter);
     }, [])
@@ -46,17 +38,13 @@ const Dashboard = ():JSX.Element => {
         }
         else if(filter === "week")
         {
-            startDate = new Date(new Date().setDate(new Date().getDate() - 7))          // requestAnalyticsChange(startDate, todayDate);
+            startDate = new Date(new Date().setDate(new Date().getDate() - 7)) 
         }
-        requestAnalyticsChange(startDate, todayDate);   
+        requestAnalyticsChange(startDate, new Date());   
         setFilter(filter);
     }
 
     const requestAnalyticsChange = (startDate:Date, endDate:Date) => {
-        setDateRange({
-            "startDate": startDate.toISOString().split("T")[0],
-            "endDate": endDate.toISOString().split("T")[0]
-        });
         dispatch(analyticsCategoryRequested({"startDate":startDate.toISOString().split("T")[0],"endDate":endDate.toISOString().split("T")[0]}))
         dispatch(analyticsRequested({"startDate":startDate.toISOString().split("T")[0],"endDate":endDate.toISOString().split("T")[0]}));
     }
@@ -79,11 +67,8 @@ const Dashboard = ():JSX.Element => {
             {error && !isLoading && <Error error={error} />}
             <Text fontFamily="Poppins" fontStyle="normal" fontWeight={Platform.OS === 'ios' ? "600" : "bold"} fontSize="20" lineHeight="30" >Overview</Text>
             <Filter filter={filter} filterValues={filterValues} filterHandler={(value) => filterHandler(value)} />
-            <TotalHoursChart 
-                categories={taskCategoryData}
-                taskCategoryLoading={taskCategoryLoading}
-            />
-            <WorkingHoursChart labels={labels} dataset={dataset} legends={legends}/>
+            <TotalHoursChart />
+            <WorkingHoursChart labels={['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul']}  legends={['Category 1', 'Category 2', 'More']} dataset={[[10, 20, 10], [10, 40,50], [10, 10, 10], [10, 20, 10], [10, 40,50], [10, 10, 10], [10, 20, 10]]}/>
             <OverallPendingTask 
                 max={('totalTasks' in taskSuccessData) ? taskSuccessData['totalTasks'] : 1} 
                 value={('completedTasks' in taskSuccessData) ? taskSuccessData['completedTasks'] : 1}  

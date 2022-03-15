@@ -4,7 +4,7 @@ import React from "react";
 import {View, Text, Spinner} from 'native-base';
 
 const OverallPendingTask = ({max,value,isLoading}:{max:number,value:number,isLoading:boolean}) => {
-      const screenWidth = Dimensions.get("window").width;
+    const screenWidth = Dimensions.get("window").width;
     return (
         <View flex="1" bg="white" p="4" mt="2" rounded="xl">
             <Text fontFamily="Roboto" fontStyle="normal" fontWeight="bold" fontSize="16" lineHeight="19" letterSpacing="0.5" textTransform="uppercase">OVERALL PENDING TASK</Text>

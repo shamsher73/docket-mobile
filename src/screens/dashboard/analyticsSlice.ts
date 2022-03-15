@@ -7,7 +7,6 @@ const analyticsReducer = createSlice({
         isSuccessLoading: false,
         error: null,
         isCategoryLoading: false,
-
         categoryData: [],
     },
     reducers : {

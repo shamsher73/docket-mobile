@@ -5,7 +5,7 @@ import Add from './../../../assets/images/add.svg';
 import OvalIcon from './../../../assets/images/oval.svg';
 import React from "react";
 import { useState } from 'react';
-import { Button, StyleSheet, TextInput, TouchableHighlight } from 'react-native';
+import { Button, TouchableHighlight } from 'react-native';
 import { Input, Text, View } from 'native-base';
 import DatePicker from 'react-native-date-picker';
 
@@ -17,9 +17,6 @@ interface SubTask {
 const SubTask = ({subTasks,handleChange}:{subTasks:Array<SubTask>,handleChange:any}):JSX.Element => {
     const [isStartOpen, setIsStartOpen] = useState(false);
     const [isEndOpen, setIsEndOpen] = useState(false);
-
-    console.log(subTasks);
-    // const tagsArray = tags.map((tag:Tag) => tag.name)
     const [addSubtask, setAddSubtask] = useState(false);
     const [newSubtask, setNewSubtask] = useState({
                                     id:'',
@@ -45,7 +42,7 @@ const SubTask = ({subTasks,handleChange}:{subTasks:Array<SubTask>,handleChange:a
         handleChange(subTasks.filter((t:SubTask) => t.name !== subTask.name));
     }
 
-    const subTaskList = subTasks.map((subTask:any, index:number) => {
+    const subTaskList =subTasks && subTasks.map((subTask:SubTask, index:number) => {
             return (
                 <View key={index} flexDirection="row" alignItems="center" p="1" mr="2" justifyContent="space-between">
                     <View flexDirection="row" alignItems="center">
