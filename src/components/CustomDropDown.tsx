@@ -19,7 +19,7 @@ const CustomDropDown = ({text,setText}:{text:string,setText:React.Dispatch<React
 
       const Item = ({ title }:{title:string}) => (
         <TouchableOpacity onPress={() => selectCategory(title)}>
-            <Text p="1" fontFamily="Poppins" fontStyle="normal" fontSize="12" lineHeight="23">{title}</Text>
+            <Text p="1" fontFamily="Poppins" fontStyle="normal" fontSize="12" lineHeight="23" color="#44444F">{title}</Text>
         </TouchableOpacity>
       );
 
