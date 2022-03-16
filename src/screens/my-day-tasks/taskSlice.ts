@@ -28,7 +28,7 @@ interface TaskAction {
     payload: TaskState
 }
 
-const taskReducer = createSlice({
+const taskReducer:any = createSlice({
     name : 'task',
     initialState: {
         tasks: [],
