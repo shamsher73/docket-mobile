@@ -5,6 +5,7 @@ import {default as analyticsSaga} from "../screens/dashboard/saga";
 import createSagaMiddleware from "redux-saga";
 import analyticsSlice from '../screens/dashboard/analyticsSlice';
 import categorySlice from '../screens/my-day-tasks/categorySlice';
+import userSlice from '../screens/login/userSlice';
 import {default as categorySaga} from "../screens/my-day-tasks/categorySaga";
 
 
@@ -16,6 +17,7 @@ export const store = configureStore({
     task: taskSlice,
     analytics: analyticsSlice,
     category: categorySlice,
+    user: userSlice,
   },
   middleware
 });

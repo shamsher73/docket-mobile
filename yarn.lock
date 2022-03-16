@@ -1686,6 +1686,11 @@
   resolved "https://registry.npmjs.org/@react-native-community/eslint-plugin/-/eslint-plugin-1.1.0.tgz"
   integrity sha512-W/J0fNYVO01tioHjvYWQ9m6RgndVtbElzYozBq1ZPrHO/iCzlqoySHl4gO/fpCl9QEFjvJfjPgtPMTMlsoq5DQ==
 
+"@react-native-google-signin/google-signin@^7.2.1":
+  version "7.2.1"
+  resolved "https://registry.yarnpkg.com/@react-native-google-signin/google-signin/-/google-signin-7.2.1.tgz#01ccb58fce109e68cd03d5221881a7449a4d93e4"
+  integrity sha512-DZxITp7c77Mtirwzr74up6LSHPP4baGHEN4x8yknpgEUQwDx/6edchhtwVQqW9Uw06+l8Ge/gsUeDZ0TYIm01w==
+
 "@react-native-picker/picker@^2.3.1":
   version "2.3.1"
   resolved "https://registry.yarnpkg.com/@react-native-picker/picker/-/picker-2.3.1.tgz#e77e14c351605afdf4bd5fe93fa1fe381cc6ad27"
@@ -2262,10 +2267,6 @@
   version "0.2.0"
   resolved "https://registry.npmjs.org/@trysound/sax/-/sax-0.2.0.tgz"
   integrity sha512-L7z9BgrNEcYyUYtF+HaEfiS5ebkh9jXqbszz7pC0hRBPaatV0XjSD3+eHrpqFemQfgwiFF0QPIarnIihIDn7OA==
-
-"@types/@react-navigation/drawer":
-  version "2.3.4"
-  resolved "https://codeload.github.com/react-navigation/drawer/tar.gz/75688a4b6e50e2e884f15b290692166adb1264f3"
 
 "@types/axios@^0.14.0":
   version "0.14.0"
