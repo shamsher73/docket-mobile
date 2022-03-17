@@ -1,8 +1,19 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
 
+export interface CategoryType {
+    name: string,
+    id: string,
+    userId: string
+}
 
-const categoryReducer = createSlice({
+interface CategoryState {
+    categories: Array<CategoryType>,
+    isCategoryLoading: boolean,
+    error: string
+}
+
+const categoryReducer:any = createSlice({
     name : 'category',
     initialState: {
         categories: [],
@@ -13,11 +24,11 @@ const categoryReducer = createSlice({
         categoryRequested : () => {
             return {categories: [], isCategoryLoading: true, error: null};
         },
-        categoryRequestedSuccess : (state:RootState, action) => {
+        categoryRequestedSuccess : (state:CategoryState, action:{payload:{categories:Array<CategoryType>}}) => {
             state.isCategoryLoading = false;
             state.categories = action.payload         
         },
-        categoryRequestedFailed : (state:RootState, action) => {
+        categoryRequestedFailed : (state:RootState, action:{payload:{error:string}}) => {
             state.isCategoryLoading = false;
             state.error = action.payload.error;
         },

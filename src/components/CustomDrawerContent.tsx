@@ -3,6 +3,8 @@ import { StyleSheet } from "react-native";
 import React, { useState } from "react";
 import UserIcon from "./UserIcon";
 import { DrawerNavigationHelpers } from "@react-navigation/drawer/lib/typescript/src/types";
+import { useSelector } from "react-redux";
+import { RootState } from "../app/store";
 
 const RouteItem = ({name,setCurrentRoute,navigation,currentRoute}:{name:string,setCurrentRoute:React.Dispatch<React.SetStateAction<string>>,navigation:DrawerNavigationHelpers,currentRoute:string}) => {
     return (
@@ -11,17 +13,20 @@ const RouteItem = ({name,setCurrentRoute,navigation,currentRoute}:{name:string,s
 }
 
 const CustomDrawerContent = (props:DrawerContentComponentProps) => {
+    const authUser = useSelector((state: RootState) => state.user);
+
     const [currentRoute, setCurrentRoute] = useState<string>('Dashboard');
     const {navigation} = props;
-    const Labels = ['Dashboard','My Day Tasks','My Tasks','History', 'Lists', 'Category and Tags'];
+    const Labels = ['Dashboard','My Day Tasks','My Tasks'];
+    // const Labels = ['Dashboard','My Day Tasks','My Tasks','History', 'Lists', 'Category and Tags'];
     const DrawerList = Labels.map((name,index) => 
                                 <RouteItem key={index} name={name} currentRoute={currentRoute} setCurrentRoute={setCurrentRoute} navigation={navigation} />       
     );
     return (
         <DrawerContentScrollView {...props} >
           <DrawerItemList {...props}   />
-            <DrawerItem label="Shivam Chaudhary" onPress={() => {}} style={styles.header} labelStyle={styles.headerText}
-                icon={() => <UserIcon /> }
+            <DrawerItem label={authUser.name} onPress={() => {}} style={styles.header} labelStyle={styles.headerText}
+                icon={() => <UserIcon url={authUser.photo}/>  }
             />
             {DrawerList}
         </DrawerContentScrollView>

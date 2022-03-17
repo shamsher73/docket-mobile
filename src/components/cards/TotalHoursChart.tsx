@@ -33,7 +33,7 @@ const TotalHoursChart = (): JSX.Element => {
     if((index%2) === 0 && index < data.length-1)
     {
       return (
-        <View flexDirection="row">
+        <View flexDirection="row" key={index}>
         {data && data.length > index && <Legend index={index} taskCategoryData={data} />}
         {data && data.length > index+1 && <Legend index={index+1} taskCategoryData={data} />}
         </View>
@@ -61,7 +61,7 @@ const TotalHoursChart = (): JSX.Element => {
 
 const Legend = ({index,taskCategoryData}:{index:number,taskCategoryData:Array<CategoryType>}) => { 
   return (
-    <View flexDirection="row" justifyContent="flex-start" alignItems="center" pl="4" maxWidth="1/2" width="full">
+    <View flexDirection="row" justifyContent="flex-start" alignItems="center" pl="4" maxWidth="1/2" width="full" key={index}>
       <View style={{ width: 10, height: 10, borderRadius: 5, backgroundColor: colors[index] }}></View>
       <View flexDirection="row" justifyContent="space-between" flex="1">
         <Text fontSize="14" fontWeight="normal" fontStyle="normal" lineHeight="24" letterSpacing="0.1" pl="1">{taskCategoryData[index]['categoryName']}</Text>
