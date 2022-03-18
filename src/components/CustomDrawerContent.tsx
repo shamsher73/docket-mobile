@@ -17,7 +17,7 @@ const CustomDrawerContent = (props:DrawerContentComponentProps) => {
 
     const [currentRoute, setCurrentRoute] = useState<string>('Dashboard');
     const {navigation} = props;
-    const Labels = ['Dashboard','My Day Tasks','My Tasks'];
+    const Labels = ['Dashboard','My Day Tasks','My Tasks','History'];
     // const Labels = ['Dashboard','My Day Tasks','My Tasks','History', 'Lists', 'Category and Tags'];
     const DrawerList = Labels.map((name,index) => 
                                 <RouteItem key={index} name={name} currentRoute={currentRoute} setCurrentRoute={setCurrentRoute} navigation={navigation} />       

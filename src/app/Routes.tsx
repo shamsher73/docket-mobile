@@ -8,6 +8,7 @@ import AddTask from "../screens/my-day-tasks/AddTask";
 import React from "react";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import MyTasks from "../screens/my-tasks";
+import History from "../screens/history";
 
 
 const Routes = () => {
@@ -32,6 +33,7 @@ const Routes = () => {
             <Drawer.Screen name="My Day Tasks" component={MyDayTasks} options={options} />
             <Drawer.Screen name="My Tasks" component={MyTasks} options={options} />
             <Drawer.Screen name="Add Task" component={AddTask} options={hiddenItem} />
+            <Drawer.Screen name="History" component={History} options={options} />
         </Drawer.Navigator>
     )
 }
