@@ -14,7 +14,7 @@ import { taskMarkCompleteRequested, tasksRequested, TaskState } from "../screens
 import TaskModal from "./TaskModal";
 import AddTask from "../screens/my-day-tasks/AddTask";
 
-const TasksView = ({ filterByDueDate }: { filterByDueDate: boolean }) => {
+const TasksView = ({ filterByDueDate,showAddoption,dates }: { filterByDueDate: boolean,showAddoption:boolean,dates:{startDate:Date,endDate:Date} }) => {
     const dispatch = useDispatch();
     const [task, setTask] = useState(null);
     const tasks = useSelector((state: RootState) => state.task.tasks);
@@ -50,7 +50,12 @@ const TasksView = ({ filterByDueDate }: { filterByDueDate: boolean }) => {
     }
 
     const filteredListTemp = (filter === 'all') ? tasks : tasks.filter((task:TaskState) => task.status === filter);
-    const filteredList = (filterByDueDate) ? filteredListTemp.filter((task:TaskState) => (task.dueDate.substring(0, 10) === new Date().toISOString().split('T')[0])) : filteredListTemp;
+    const filteredList = (filterByDueDate) ? 
+    filteredListTemp.filter((task:TaskState) => (
+        task.dueDate.substring(0, 10) >= dates.startDate.toISOString().split('T')[0] && 
+        task.dueDate.substring(0, 10) <= dates.endDate.toISOString().split('T')[0]
+        )) 
+    : filteredListTemp;
 
     const toggleStatus = (task:TaskState) => {
         dispatch(taskMarkCompleteRequested({ id: task.id, status: task.status === 'completed' ? 'pending' : 'completed' }));
@@ -73,8 +78,9 @@ const TasksView = ({ filterByDueDate }: { filterByDueDate: boolean }) => {
 
     return (
         <View p="3" flex="1">
+       
             <HStack>
-                <View flex="1">
+                <View flex="1" >
                     <Filter filter={filter} filterValues={['all', 'pending', 'completed']} filterHandler={changeFilter} />
                 </View>
                 <View justifyContent="center" bg="white" rounded="xl" p="3" ml="1">
@@ -99,11 +105,14 @@ const TasksView = ({ filterByDueDate }: { filterByDueDate: boolean }) => {
                     </HStack>
                     : list}
             </ScrollView>
-            <TouchableHighlight onPress={() => setModalVisible(true)} >
-                <View position="absolute" right="5" bottom="5" width="20" height="20" bg="#6b8ae6" borderRadius="40" justifyContent="center" alignItems="center">
-                    <Add onPress={() => setModalVisible(true)} />
-                </View>
-            </TouchableHighlight>
+            {showAddoption &&
+                  <TouchableHighlight onPress={() => setModalVisible(true)} >
+                  <View position="absolute" right="5" bottom="5" width="20" height="20" bg="#6b8ae6" borderRadius="40" justifyContent="center" alignItems="center">
+                      <Add onPress={() => setModalVisible(true)} />
+                  </View>
+              </TouchableHighlight>
+            }
+      
             <AddTask modalVisible={modalVisible} setModalVisible={setModalVisible} />
             <TaskModal
                 task={task}
