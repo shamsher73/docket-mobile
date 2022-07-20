@@ -14,10 +14,16 @@ Step 2. Install NPM packages. On your terminal run
 cd docket-mobile ; npm install
 ```
 
-Step 3. Start the yarn with ios. On your terminal run 
+Step 3. Start the yarn with ios or android. On your terminal run 
 
 ```bash
 yarn ios
 ```
+OR
+
+```bash
+yarn android
+```
+
 
 
